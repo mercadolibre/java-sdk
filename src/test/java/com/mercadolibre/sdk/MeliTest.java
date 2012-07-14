@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.Response;
 
-public class MeliClientTest extends Assert {
+public class MeliTest extends Assert {
     @Test
     public void testGetAuthUrl() {
 	assertEquals(
