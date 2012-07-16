@@ -7,18 +7,6 @@ This is the official Java SDK for MercadoLibre's Platform.
 You can download the latest build at: 
     http://github.com/mercadolibre/java-sdk/downloads
 
-Or use it as a maven dependency:
-
-```xml
-<dependency>
-    <groupId>redis.clients</groupId>
-    <artifactId>jedis</artifactId>
-    <version>2.0.0</version>
-    <type>jar</type>
-    <scope>compile</scope>
-</dependency>
-```
-
 ## How do I start using it?
 
 The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/creating-your-own-application/)
