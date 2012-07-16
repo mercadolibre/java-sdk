@@ -4,6 +4,16 @@
 	<groupId>com.mercadolibre</groupId>
 	<artifactId>sdk</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<distributionManagement>
+		<repository>
+			<id>repo</id>
+			<url>https://github.com/mercadolibre/java-sdk-repo/raw/master/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot-repo</id>
+			<url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<plugins>

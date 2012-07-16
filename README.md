@@ -7,6 +7,37 @@ This is the official Java SDK for MercadoLibre's Platform.
 You can download the latest build at: 
     http://github.com/mercadolibre/java-sdk/downloads
 
+How do I install it using maven:
+
+Just add to your pom the following repository
+
+```xml
+<repositories>
+        ...
+        <repository>
+                <id>mercadolibre-snapshots</id>
+                <url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
+        </repository>
+        ...
+</repositories>
+```
+
+And then add your dependency
+
+```xml
+<dependencies>
+        ...
+        <dependency>
+                <groupId>com.mercadolibre</groupId>
+                <artifactId>sdk</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        ...
+</dependencies>
+```
+
+And that's it!
+
 ## How do I start using it?
 
 The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/creating-your-own-application/)
