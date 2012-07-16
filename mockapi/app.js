@@ -1,4 +1,5 @@
 var express = require('express');
+var fs = require('fs');
 
 var app = express.createServer();
 
@@ -97,3 +98,5 @@ app.delete('/items/123', function(req, res) {
 });
 
 app.listen(3000);
+
+fs.writeFileSync('/tmp/mockapi.pid', process.pid);

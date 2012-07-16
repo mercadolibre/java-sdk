@@ -1,6 +1,7 @@
 test:
+	cd mockapi ; npm install
 	node mockapi/app.js &
 	mvn test
-	$(pkill -9 node)
+	kill `cat /tmp/mockapi.pid` 
 	
 .PHONY: test
