@@ -62,7 +62,7 @@ Response r = m.post("/items", params, "{\"foo\":\"bar\"}");
 ```java
 FluentStringsMap params = new FluentStringsMap();
 params.add("access_token", m.getAccessToken());
-Response r = m.post("/items", params, "{\"foo\":\"bar\"}");
+Response r = m.put("/items", params, "{\"foo\":\"bar\"}");
 ```
 ## Making DELETE calls
 
