@@ -97,6 +97,13 @@ app.delete('/items/123', function(req, res) {
     }
 });
 
+app.get('/echo/user_agent',function(req,res) {
+    if (req.headers['user-agent'].match(/MELI-JAVA-SDK-.*/))
+        res.send(200);
+    else
+        res.send(400);
+});
+
 app.listen(3000);
 
 fs.writeFileSync('/tmp/mockapi.pid', process.pid);

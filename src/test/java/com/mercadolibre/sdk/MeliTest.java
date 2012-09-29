@@ -73,6 +73,16 @@ public class MeliTest extends Assert {
 	assertEquals(403, response.getStatusCode());
     }
 
+    @Test
+    public void testUserAgent() throws IOException, MeliException {
+	Meli m = new Meli(123456, "client secret", "invalid token");
+
+	FluentStringsMap params = new FluentStringsMap();
+	params.add("access_token", m.getAccessToken());
+	Response response = m.get("/echo/user_agent", params);
+	assertEquals(200, response.getStatusCode());
+    }
+
     public void testPost() throws MeliException {
 	Meli m = new Meli(123456, "client secret", "valid token");
 
