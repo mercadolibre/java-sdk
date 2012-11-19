@@ -18,22 +18,22 @@ public class Meli {
     public static String apiUrl = "https://api.mercadolibre.com";
     private String accessToken;
     private String refreshToken;
-    private int clientId;
+    private Long clientId;
     private String clientSecret;
     private AsyncHttpClient http = new AsyncHttpClient();
 
-    public Meli(int clientId, String clientSecret) {
+    public Meli(Long clientId, String clientSecret) {
 	this.clientId = clientId;
 	this.clientSecret = clientSecret;
     }
 
-    public Meli(int clientId, String clientSecret, String accessToken) {
+    public Meli(Long clientId, String clientSecret, String accessToken) {
 	this.accessToken = accessToken;
 	this.clientId = clientId;
 	this.clientSecret = clientSecret;
     }
 
-    public Meli(int clientId, String clientSecret, String accessToken,
+    public Meli(Long clientId, String clientSecret, String accessToken,
 	    String refreshToken) {
 	this.accessToken = accessToken;
 	this.clientId = clientId;
