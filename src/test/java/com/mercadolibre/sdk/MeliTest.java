@@ -75,7 +75,7 @@ public class MeliTest extends Assert {
 
     @Test
     public void testUserAgent() throws IOException, MeliException {
-	Meli m = new Meli(123456, "client secret", "invalid token");
+	Meli m = new Meli(123456l, "client secret", "invalid token");
 
 	FluentStringsMap params = new FluentStringsMap();
 	params.add("access_token", m.getAccessToken());
