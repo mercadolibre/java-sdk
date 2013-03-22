@@ -13,7 +13,7 @@ public class MeliTest extends Assert {
     public void testGetAuthUrl() {
 	assertEquals(
 		"https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=123456&redirect_uri=http%3A%2F%2Fsomeurl.com",
-		new Meli(123456, "client secret")
+		new Meli(123456l, "client secret")
 			.getAuthUrl("http://someurl.com"));
     }
 
@@ -21,7 +21,7 @@ public class MeliTest extends Assert {
     public void testAuthorizationFailure() throws AuthorizationFailure {
 	Meli.apiUrl = "http://localhost:3000";
 
-	new Meli(123456, "client secret").authorize("bad code",
+	new Meli(123456l, "client secret").authorize("bad code",
 		"http://someurl.com");
     }
 
@@ -29,7 +29,7 @@ public class MeliTest extends Assert {
     public void testAuthorizationSuccess() throws AuthorizationFailure {
 	Meli.apiUrl = "http://localhost:3000";
 
-	Meli m = new Meli(123456, "client secret");
+	Meli m = new Meli(123456l, "client secret");
 	m.authorize("valid code with refresh token", "http://someurl.com");
 
 	assertEquals("valid token", m.getAccessToken());
@@ -40,7 +40,7 @@ public class MeliTest extends Assert {
     public void testGet() throws MeliException, IOException {
 	Meli.apiUrl = "http://localhost:3000";
 
-	Meli m = new Meli(123456, "client secret", "valid token");
+	Meli m = new Meli(123456l, "client secret", "valid token");
 
 	Response response = m.get("/sites");
 
@@ -52,7 +52,7 @@ public class MeliTest extends Assert {
     public void testGetWithRefreshToken() throws MeliException, IOException {
 	Meli.apiUrl = "http://localhost:3000";
 
-	Meli m = new Meli(123456, "client secret", "expired token",
+	Meli m = new Meli(123456l, "client secret", "expired token",
 		"valid refresh token");
 
 	FluentStringsMap params = new FluentStringsMap();
@@ -65,7 +65,7 @@ public class MeliTest extends Assert {
 
     @Test
     public void testErrorHandling() throws IOException, MeliException {
-	Meli m = new Meli(123456, "client secret", "invalid token");
+	Meli m = new Meli(123456l, "client secret", "invalid token");
 
 	FluentStringsMap params = new FluentStringsMap();
 	params.add("access_token", m.getAccessToken());
@@ -74,7 +74,7 @@ public class MeliTest extends Assert {
     }
 
     public void testPost() throws MeliException {
-	Meli m = new Meli(123456, "client secret", "valid token");
+	Meli m = new Meli(123456l, "client secret", "valid token");
 
 	FluentStringsMap params = new FluentStringsMap();
 	params.add("access_token", m.getAccessToken());
@@ -84,7 +84,7 @@ public class MeliTest extends Assert {
     }
 
     public void testPostWithRefreshToken() throws MeliException {
-	Meli m = new Meli(123456, "client secret", "expired token",
+	Meli m = new Meli(123456l, "client secret", "expired token",
 		"valid refresh token");
 
 	FluentStringsMap params = new FluentStringsMap();
@@ -95,7 +95,7 @@ public class MeliTest extends Assert {
     }
 
     public void testPut() throws MeliException {
-	Meli m = new Meli(123456, "client secret", "valid token");
+	Meli m = new Meli(123456l, "client secret", "valid token");
 
 	FluentStringsMap params = new FluentStringsMap();
 	params.add("access_token", m.getAccessToken());
@@ -105,7 +105,7 @@ public class MeliTest extends Assert {
     }
 
     public void testPutWithRefreshToken() throws MeliException {
-	Meli m = new Meli(123456, "client secret", "expired token",
+	Meli m = new Meli(123456l, "client secret", "expired token",
 		"valid refresh token");
 
 	FluentStringsMap params = new FluentStringsMap();
@@ -116,7 +116,7 @@ public class MeliTest extends Assert {
     }
 
     public void testDelete() throws MeliException {
-	Meli m = new Meli(123456, "client secret", "valid token");
+	Meli m = new Meli(123456l, "client secret", "valid token");
 
 	FluentStringsMap params = new FluentStringsMap();
 	params.add("access_token", m.getAccessToken());
@@ -126,7 +126,7 @@ public class MeliTest extends Assert {
     }
 
     public void testDeleteWithRefreshToken() throws MeliException {
-	Meli m = new Meli(123456, "client secret", "expired token",
+	Meli m = new Meli(123456l, "client secret", "expired token",
 		"valid refresh token");
 
 	FluentStringsMap params = new FluentStringsMap();
