@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.AsyncHttpClient.BoundRequestBuilder;
 import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.Response;
@@ -20,7 +21,12 @@ public class Meli {
     private String refreshToken;
     private Long clientId;
     private String clientSecret;
-    private AsyncHttpClient http = new AsyncHttpClient();
+    private AsyncHttpClient http;
+    {
+    	AsyncHttpClientConfig cf = new AsyncHttpClientConfig.Builder()
+                 .setUserAgent("MELI-JAVA-SDK-0.0.1").build();
+    	http = new AsyncHttpClient(cf);
+    } 
 
     public Meli(Long clientId, String clientSecret) {
 	this.clientId = clientId;
