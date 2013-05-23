@@ -40,8 +40,8 @@ And that's it!
 
 ## How do I start using it?
 
-The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/creating-your-own-application/)
-
+The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/application-manager/)
+
 ```java
 Meli m = new Meli(1234, "a secret");
 ```
@@ -49,9 +49,9 @@ With this instance you can start working on MercadoLibre's APIs.
 
 There are some design considerations worth to mention.
 1. This SDK is just a thin layer on top of an http client to handle all the OAuth WebServer flow for you.
-2. There is no JSON parsing. This is left to you. But this SDK will include [gson](http://code.google.com/p/google-gson/) library for internal usage.
+2. There is no JSON parsing. This is left to you. But this SDK will include [gson](http://code.google.com/p/google-gson/) library for internal usage.
 
-## How do I redirect users to authorize my application?
+## How do I redirect users to authorize my application?
 
 This is a 2 step process.
 
