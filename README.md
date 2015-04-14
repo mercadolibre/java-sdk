@@ -30,7 +30,7 @@ And then add your dependency
         <dependency>
                 <groupId>com.mercadolibre</groupId>
                 <artifactId>sdk</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.0.2-SNAPSHOT</version>
         </dependency>
         ...
 </dependencies>
