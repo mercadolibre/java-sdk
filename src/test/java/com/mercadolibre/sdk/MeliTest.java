@@ -14,7 +14,7 @@ public class MeliTest extends Assert {
 	assertEquals(
 		"https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=123456&redirect_uri=http%3A%2F%2Fsomeurl.com",
 		new Meli(123456l, "client secret")
-			.getAuthUrl("http://someurl.com"));
+			.getAuthUrl("http://someurl.com", Meli.AuthUrls.MLA));
     }
 
     @Test(expected = AuthorizationFailure.class)
