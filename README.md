@@ -5,7 +5,7 @@ This is the official Java SDK for MercadoLibre's Platform.
 ## How do I install it?
 
 You can download the latest build at: 
-    http://github.com/mercadolibre/java-sdk/downloads
+    https://github.com/mercadolibre/java-sdk/archive/master.zip
 
 How do I install it using maven:
 
