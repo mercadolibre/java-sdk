@@ -139,7 +139,7 @@ public class Meli {
 			throw new MeliException(e);
 		}
 		if (params.containsKey("access_token") && this.hasRefreshToken()
-				&& response.getStatusCode() == 404) {
+				&& response.getStatusCode() == 401) {
 			try {
 				refreshAccessToken();
 			} catch (AuthorizationFailure e1) {
@@ -251,7 +251,7 @@ public class Meli {
 			throw new MeliException(e);
 		}
 		if (params.containsKey("access_token") && this.hasRefreshToken()
-				&& response.getStatusCode() == 404) {
+				&& response.getStatusCode() == 401) {
 			try {
 				refreshAccessToken();
 			} catch (AuthorizationFailure e1) {
@@ -280,7 +280,7 @@ public class Meli {
 			throw new MeliException(e);
 		}
 		if (params.containsKey("access_token") && this.hasRefreshToken()
-				&& response.getStatusCode() == 404) {
+				&& response.getStatusCode() == 401) {
 			try {
 				refreshAccessToken();
 			} catch (AuthorizationFailure e1) {
@@ -309,7 +309,7 @@ public class Meli {
 			throw new MeliException(e);
 		}
 		if (params.containsKey("access_token") && this.hasRefreshToken()
-				&& response.getStatusCode() == 404) {
+				&& response.getStatusCode() == 401) {
 			try {
 				refreshAccessToken();
 			} catch (AuthorizationFailure e1) {
