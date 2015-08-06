@@ -334,4 +334,10 @@ public class Meli {
     public BoundRequestBuilder options(String path) {
     	return null;
     }
+    /**
+     * Close the AsyncHttpClient. Must be call after using Meli.
+     */
+    public void close() {
+    	http.close();
+    }
 }
