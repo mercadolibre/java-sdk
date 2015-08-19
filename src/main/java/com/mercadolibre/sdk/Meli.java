@@ -94,7 +94,8 @@ public class Meli {
     private BoundRequestBuilder prepareGet(String path, FluentStringsMap params) {
 		return http.prepareGet(apiUrl + path)
 			.addHeader("Accept", "application/json")
-			.setQueryParameters(params);
+			.setQueryParameters(params)
+			.setBodyEncoding("UTF-8");
     }
 
 	private BoundRequestBuilder prepareDelete(String path,
