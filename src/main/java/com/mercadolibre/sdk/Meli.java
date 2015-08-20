@@ -94,22 +94,22 @@ public class Meli {
     private BoundRequestBuilder prepareGet(String path, FluentStringsMap params) {
 		return http.prepareGet(apiUrl + path)
 			.addHeader("Accept", "application/json")
-			.setQueryParameters(params)
-			.setBodyEncoding("UTF-8");
+			.addHeader("Accept-Charset", "utf-8")
+			.setQueryParams(params);
     }
 
 	private BoundRequestBuilder prepareDelete(String path,
 			FluentStringsMap params) {
 		return http.prepareDelete(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params);
+				.setQueryParams(params);
 	}
 
 	private BoundRequestBuilder preparePost(String path,
 			FluentStringsMap params, String body) {
 		return http.preparePost(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params)
+				.setQueryParams(params)
 				.setHeader("Content-Type", "application/json").setBody(body)
 				.setBodyEncoding("UTF-8");
 	}
@@ -118,7 +118,7 @@ public class Meli {
 			FluentStringsMap params, String body) {
 		return http.preparePut(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params)
+				.setQueryParams(params)
 				.setHeader("Content-Type", "application/json").setBody(body)
 				.setBodyEncoding("UTF-8");
 	}
@@ -126,7 +126,7 @@ public class Meli {
 	private BoundRequestBuilder preparePost(String path, FluentStringsMap params) {
 		return http.preparePost(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params);
+				.setQueryParams(params);
 	}
 
 	public Response get(String path, FluentStringsMap params)
@@ -146,7 +146,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = prepareGet(path, params);
 
 			try {
@@ -258,7 +258,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = preparePost(path, params, body);
 
 			try {
@@ -287,7 +287,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = preparePut(path, params, body);
 
 			try {
@@ -316,7 +316,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = prepareDelete(path, params);
 
 			try {
