@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mercadolibre</groupId>
-	<artifactId>sdk</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<artifactId>com.mercadolibre.sdk</artifactId>
+	<name>Mercadolibre Java SDK</name>
+	<version>0.0.3-SNAPSHOT</version>		
 	<distributionManagement>
 		<repository>
 			<id>repo</id>
@@ -26,6 +28,24 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+		        <artifactId>maven-assembly-plugin</artifactId>
+		        <version>2.5.5</version>
+		        <configuration>
+		          <descriptorRefs>
+		            <descriptorRef>jar-with-dependencies</descriptorRef>
+		          </descriptorRefs>
+		        </configuration>
+		        <executions>
+		          <execution>
+		            <id>make-assembly</id> 
+		            <phase>package</phase> 
+		            <goals>
+		              <goal>single</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		      </plugin>
 		</plugins>
 	</build>
 
@@ -33,17 +53,23 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>${junit.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.ning</groupId>
 			<artifactId>async-http-client</artifactId>
-			<version>1.7.4</version>
+			<version>${async-http-client.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.2.2</version>
+			<version>${gson.version}</version>
 		</dependency>
 	</dependencies>
+	<properties>
+		<async-http-client.version>1.7.4</async-http-client.version>
+		<gson.version>2.2.2</gson.version>
+		<junit.version>4.10</junit.version>
+	</properties>
 </project>
