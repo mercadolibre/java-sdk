@@ -16,15 +16,15 @@ import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.Response;
 
 public class Meli {
-    
+
 	public static String apiUrl = "https://api.mercadolibre.com";
- 
+
 	/**
 	 *	Availables auth sites. One user - application can only operate in one site
 	 *
 	 */
 	public static enum AuthUrls {
-		MLA("https://auth.mercadolibre.com.ar"), // Argentina 
+		MLA("https://auth.mercadolibre.com.ar"), // Argentina
 		MLB("https://auth.mercadolibre.com.br"), // Brasil
 		MCO("https://auth.mercadolibre.com.co"), // Colombia
 		MCR("https://auth.mercadolibre.com.cr"), // Costa Rica
@@ -37,18 +37,18 @@ public class Meli {
 		MPE("https://auth.mercadolibre.com.pe"), // Peru
 		MPT("https://auth.mercadolibre.com.pt"), // Prtugal
 		MRD("https://auth.mercadolibre.com.do"); // Dominicana
-		
+
 		private String value;
-		
+
         private AuthUrls(String value) {
             this.value = value;
         }
-        
+
         public String getValue() {
         	return value;
         }
 	};
-    
+
     private String accessToken;
     private String refreshToken;
     private Long clientId;
@@ -58,7 +58,7 @@ public class Meli {
     	AsyncHttpClientConfig cf = new AsyncHttpClientConfig.Builder()
                  .setUserAgent("MELI-JAVA-SDK-0.0.3").build();
     	http = new AsyncHttpClient(cf);
-    } 
+    }
 
     public Meli(Long clientId, String clientSecret) {
 		this.clientId = clientId;
@@ -94,21 +94,21 @@ public class Meli {
     private BoundRequestBuilder prepareGet(String path, FluentStringsMap params) {
 		return http.prepareGet(apiUrl + path)
 			.addHeader("Accept", "application/json")
-			.setQueryParameters(params);
+			.SetQueryParams(params);
     }
 
 	private BoundRequestBuilder prepareDelete(String path,
 			FluentStringsMap params) {
 		return http.prepareDelete(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params);
+				.SetQueryParams(params);
 	}
 
 	private BoundRequestBuilder preparePost(String path,
 			FluentStringsMap params, String body) {
 		return http.preparePost(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params)
+				.SetQueryParams(params)
 				.setHeader("Content-Type", "application/json").setBody(body)
 				.setBodyEncoding("UTF-8");
 	}
@@ -117,7 +117,7 @@ public class Meli {
 			FluentStringsMap params, String body) {
 		return http.preparePut(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params)
+				.SetQueryParams(params)
 				.setHeader("Content-Type", "application/json").setBody(body)
 				.setBodyEncoding("UTF-8");
 	}
@@ -125,7 +125,7 @@ public class Meli {
 	private BoundRequestBuilder preparePost(String path, FluentStringsMap params) {
 		return http.preparePost(apiUrl + path)
 				.addHeader("Accept", "application/json")
-				.setQueryParameters(params);
+				.SetQueryParams(params);
 	}
 
 	public Response get(String path, FluentStringsMap params)
@@ -145,7 +145,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = prepareGet(path, params);
 
 			try {
@@ -164,13 +164,13 @@ public class Meli {
 		params.add("client_secret", this.clientSecret);
 		params.add("refresh_token", this.refreshToken);
 		BoundRequestBuilder req = preparePost("/oauth/token", params);
-	
+
 		parseToken(req);
     }
 
     /**
-     * 
-     * @param callback: The callback URL. Must be the applications redirect URI 
+     *
+     * @param callback: The callback URL. Must be the applications redirect URI
      * @param authUrl: The authorization URL. Get from Meli.AuthUrls
      * @return the authorization URL
      */
@@ -257,7 +257,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = preparePost(path, params, body);
 
 			try {
@@ -286,7 +286,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = preparePut(path, params, body);
 
 			try {
@@ -315,7 +315,7 @@ public class Meli {
 			} catch (AuthorizationFailure e1) {
 				return response;
 			}
-			params.replace("access_token", this.accessToken);
+			params.replaceWith("access_token", this.accessToken);
 			r = prepareDelete(path, params);
 
 			try {
