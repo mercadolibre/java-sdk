@@ -66,7 +66,7 @@ This will give you the url to redirect the user. You need to specify a callback 
 Once the user is redirected to your callback url, you'll receive in the query string, a parameter named ```code```. You'll need this for the second part of the process.
 
 ```java
-m.authorize("the received code", "http://somecallbackurl");
+m.authorize("the received code", "http://somecallbackurl",Meli.AuthUrls.MLB); // Don't forget to set the autentication URL of your country.
 ```
 
 This will get an ```accessToken``` and a ```refreshToken``` (is case your application has the ```offline_access```) for your application and your user.
