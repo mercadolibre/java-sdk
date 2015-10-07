@@ -19,7 +19,6 @@ public class MeliTest extends Assert {
 
     @Test(expected = AuthorizationFailure.class)
     public void testAuthorizationFailure() throws AuthorizationFailure {
-	//Meli.apiUrl = "http://localhost:3000";
         Meli.apiUrl = "https://api.mercadolibre.com";
 
 	new Meli(123456l, "client secret").authorize("bad code",
