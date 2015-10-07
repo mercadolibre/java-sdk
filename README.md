@@ -58,7 +58,7 @@ This is a 2 step process.
 First get the link to redirect the user. This is very easy! Just:
 
 ```java
-String redirectUrl = m.getAuthUrl("http://somecallbackurl");
+String redirectUrl = m.getAuthUrl("http://somecallbackurl",Meli.AuthUrls.MLB); // Don't forget to set the autentication URL of your country
 ```
 
 This will give you the url to redirect the user. You need to specify a callback url which will be the one that the user will redirected after a successfull authrization process.
@@ -66,7 +66,7 @@ This will give you the url to redirect the user. You need to specify a callback 
 Once the user is redirected to your callback url, you'll receive in the query string, a parameter named ```code```. You'll need this for the second part of the process.
 
 ```java
-m.authorize("the received code", "http://somecallbackurl",Meli.AuthUrls.MLB); // Don't forget to set the autentication URL of your country.
+m.authorize("the received code", "http://somecallbackurl");
 ```
 
 This will get an ```accessToken``` and a ```refreshToken``` (is case your application has the ```offline_access```) for your application and your user.
