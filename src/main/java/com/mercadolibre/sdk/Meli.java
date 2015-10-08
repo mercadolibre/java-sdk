@@ -171,7 +171,7 @@ public class Meli {
 		params.add("grant_type", "refresh_token");
 		params.add("client_id", String.valueOf(this.clientId));
 		params.add("client_secret", this.clientSecret);
-		params.add("refresh_token", "123");
+		params.add("refresh_token", this.refreshToken);
                 try {
                     BoundRequestBuilder req = preparePost("/oauth/token", params);
                     parseToken(req);
