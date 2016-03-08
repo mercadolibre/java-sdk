@@ -113,7 +113,7 @@ Use this SDK for any jvm-based language. It should be easy and will adapt just r
 
 ## Community
 
-You can contact us if you have questions using the standard communication channels described in the [developer's site](http://developers.mercadolibre.com/discuss)
+You can contact us if you have questions using the standard communication channels described in the [developer's site](http://developers-forum.mercadolibre.com/)
 
 ## I want to contribute!
 
