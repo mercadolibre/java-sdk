@@ -180,7 +180,7 @@ public class Meli {
 			    + clientId
 			    + "&redirect_uri="
 			    + URLEncoder.encode(callback, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+		} catch (IllegalArgumentException e) {
 		    return "https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id="
 			    + clientId + "&redirect_uri=" + callback;
 		}
