@@ -23,6 +23,7 @@ public class Meli {
 	 *	Availables auth sites. One user - application can only operate in one site
 	 *
 	 */
+        
 	public static enum AuthUrls {
 		MLA("https://auth.mercadolibre.com.ar"), // Argentina 
 		MLB("https://auth.mercadolivre.com.br"), // Brasil
@@ -40,86 +41,85 @@ public class Meli {
 		
 		private String value;
 		
-        private AuthUrls(String value) {
-            this.value = value;
-        }
-        
-        public String getValue() {
-        	return value;
-        }
+                private AuthUrls(String value) {
+                    this.value = value;
+                }
+
+                public String getValue() {
+                        return value;
+                }
 	};
     
-    private String accessToken;
-    private String refreshToken;
-    private Long clientId;
-    private String clientSecret;
-    private AsyncHttpClient http;
-    /** news **/
-    private Long   expiresIn;
-    private String scope;
-    private String userId;
-    private String tokenType;
+        private String accessToken;
+        private String refreshToken;
+        private Long clientId;
+        private String clientSecret;
+        private AsyncHttpClient http;
+        /** news **/
+        private Long   expiresIn;
+        private String scope;
+        private String userId;
+        private String tokenType;
 
     
     
-    {
-    	AsyncHttpClientConfig cf = new AsyncHttpClientConfig.Builder()
-                 .setUserAgent("MELI-JAVA-SDK-0.0.4").build();
-    	http = new AsyncHttpClient(cf);
-    } 
+        {
+            AsyncHttpClientConfig cf = new AsyncHttpClientConfig.Builder()
+                     .setUserAgent("MELI-JAVA-SDK-0.0.4").build();
+            http = new AsyncHttpClient(cf);
+        } 
 
-    public Meli(Long clientId, String clientSecret) {
-		this.clientId = clientId;
-		this.clientSecret = clientSecret;
-    }
+        public Meli(Long clientId, String clientSecret) {
+                this.clientId = clientId;
+                this.clientSecret = clientSecret;
+        }
 
-	public Meli(Long clientId, String clientSecret, String accessToken) {
-		this.accessToken = accessToken;
-		this.clientId = clientId;
-		this.clientSecret = clientSecret;
-	}
+        public Meli(Long clientId, String clientSecret, String accessToken) {
+                this.accessToken = accessToken;
+                this.clientId = clientId;
+                this.clientSecret = clientSecret;
+        }
 
-	public Meli(Long clientId, String clientSecret, String accessToken,
-			String refreshToken) {
-		this.accessToken = accessToken;
-		this.clientId = clientId;
-		this.clientSecret = clientSecret;
-		this.refreshToken = refreshToken;
-	}
+        public Meli(Long clientId, String clientSecret, String accessToken, String refreshToken) {
+                this.accessToken = accessToken;
+                this.clientId = clientId;
+                this.clientSecret = clientSecret;
+                this.refreshToken = refreshToken;
+        }
 
-    public String getAccessToken() {
-    	return this.accessToken;
-    }
+        public String getAccessToken() {
+            return this.accessToken;
+        }
 
-    public String getRefreshToken() {
-    	return this.refreshToken;
-    }
-    /** news **/
-    public Long getExpiresIn() {
-        return this.expiresIn;
-    }
+        public String getRefreshToken() {
+            return this.refreshToken;
+        }
+        /** news **/
+        public Long getExpiresIn() {
+            return this.expiresIn;
+        }
 
-    public String getScope() {
-        return this.scope;
-    }
+        public String getScope() {
+            return this.scope;
+        }
 
-    public String getUserId() {
-        return this.userId;
-    }
+        public String getUserId() {
+            return this.userId;
+        }
 
-    public String getTokenType() {
-        return this.tokenType;
-    }
+        public String getTokenType() {
+            return this.tokenType;
+        }
 
-    public Response get(String path) throws MeliException {
-    	return get(path, new FluentStringsMap());
-    }
+        public Response get(String path) throws MeliException {
+            return get(path, new FluentStringsMap());
+        }
 
-    private BoundRequestBuilder prepareGet(String path, FluentStringsMap params) {
-		return http.prepareGet(apiUrl + path)
-			.addHeader("Accept", "application/json")
-			.setQueryParameters(params);
-    }
+        private BoundRequestBuilder prepareGet(String path, FluentStringsMap params) {
+                    return http.prepareGet(apiUrl + path)
+                            .addHeader("Accept", "application/json")
+                            .setQueryParameters(params);
+        }
 
 	private BoundRequestBuilder prepareDelete(String path,
 			FluentStringsMap params) {
@@ -166,112 +166,112 @@ public class Meli {
 		return response;
 	}
 
-    public void refreshAccessToken() throws AuthorizationFailure {
-		FluentStringsMap params = new FluentStringsMap();
-		params.add("grant_type", "refresh_token");
-		params.add("client_id", String.valueOf(this.clientId));
-		params.add("client_secret", this.clientSecret);
-		params.add("refresh_token", this.refreshToken);
-                try {
-                    BoundRequestBuilder req = preparePost("/oauth/token", params);
-                    parseToken(req);
-		} catch (AuthorizationFailure e1) {
-                    System.out.println(e1.getMessage());
-		}catch (Exception e){
-                    System.out.println(e.getMessage());
-                }
-			
-    }
+        public void refreshAccessToken() throws AuthorizationFailure {
+                    FluentStringsMap params = new FluentStringsMap();
+                    params.add("grant_type", "refresh_token");
+                    params.add("client_id", String.valueOf(this.clientId));
+                    params.add("client_secret", this.clientSecret);
+                    params.add("refresh_token", this.refreshToken);
+                    try {
+                        BoundRequestBuilder req = preparePost("/oauth/token", params);
+                        parseToken(req);
+                    } catch (AuthorizationFailure e1) {
+                        System.out.println(e1.getMessage());
+                    }catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
 
-    /**
-     * 
-     * @param callback: The callback URL. Must be the applications redirect URI 
-     * @param authUrl: The authorization URL. Get from Meli.AuthUrls
-     * @return the authorization URL
-     */
-    public String getAuthUrl(String callback, AuthUrls authUrl) {
-		try {
-		    return authUrl.getValue() + "/authorization?response_type=code&client_id="
-			    + clientId
-			    + "&redirect_uri="
-			    + URLEncoder.encode(callback, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-		    return authUrl+"/authorization?response_type=code&client_id="
-			    + clientId + "&redirect_uri=" + callback;
-		}
-    }
+        }
 
-	public void authorize(String code, String redirectUri)
-			throws AuthorizationFailure {
-		FluentStringsMap params = new FluentStringsMap();
+        /**
+         * 
+         * @param callback: The callback URL. Must be the applications redirect URI 
+         * @param authUrl: The authorization URL. Get from Meli.AuthUrls
+         * @return the authorization URL
+         */
+        public String getAuthUrl(String callback, AuthUrls authUrl) {
+                    try {
+                        return authUrl.getValue() + "/authorization?response_type=code&client_id="
+                                + clientId
+                                + "&redirect_uri="
+                                + URLEncoder.encode(callback, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        return authUrl+"/authorization?response_type=code&client_id="
+                                + clientId + "&redirect_uri=" + callback;
+                    }
+        }
 
-		params.add("grant_type", "authorization_code");
-		params.add("client_id", String.valueOf(clientId));
-		params.add("client_secret", clientSecret);
-		params.add("code", code);
-		params.add("redirect_uri", redirectUri);
+            public void authorize(String code, String redirectUri)
+                            throws AuthorizationFailure {
+                    FluentStringsMap params = new FluentStringsMap();
 
-		BoundRequestBuilder r = preparePost("/oauth/token", params);
+                    params.add("grant_type", "authorization_code");
+                    params.add("client_id", String.valueOf(clientId));
+                    params.add("client_secret", clientSecret);
+                    params.add("code", code);
+                    params.add("redirect_uri", redirectUri);
 
-		parseToken(r);
-    }
+                    BoundRequestBuilder r = preparePost("/oauth/token", params);
 
-    private void parseToken(BoundRequestBuilder r) throws AuthorizationFailure {
-		Response response = null;
-		String responseBody = "";
-		try {
-			response = r.execute().get();
-			responseBody = response.getResponseBody();
-		} catch (InterruptedException e) {
-			throw new AuthorizationFailure(e);
-		} catch (ExecutionException e) {
-			throw new AuthorizationFailure(e);
-		} catch (IOException e) {
-			throw new AuthorizationFailure(e);
-		}
+                    parseToken(r);
+        }
 
-		JsonParser p = new JsonParser();
-		JsonObject object;
+        private void parseToken(BoundRequestBuilder r) throws AuthorizationFailure {
+                    Response response = null;
+                    String responseBody = "";
+                    try {
+                            response = r.execute().get();
+                            responseBody = response.getResponseBody();
+                    } catch (InterruptedException e) {
+                            throw new AuthorizationFailure(e);
+                    } catch (ExecutionException e) {
+                            throw new AuthorizationFailure(e);
+                    } catch (IOException e) {
+                            throw new AuthorizationFailure(e);
+                    }
 
-		try {
-			object = p.parse(responseBody).getAsJsonObject();
-		} catch (JsonSyntaxException e) {
-			throw new AuthorizationFailure(responseBody);
-		}
+                    JsonParser p = new JsonParser();
+                    JsonObject object;
 
-		if (response.getStatusCode() == 200) {
+                    try {
+                            object = p.parse(responseBody).getAsJsonObject();
+                    } catch (JsonSyntaxException e) {
+                            throw new AuthorizationFailure(responseBody);
+                    }
 
-			this.accessToken = object.get("access_token").getAsString();
-                        
-			JsonElement jsonElement = object.get("refresh_token");
-			this.refreshToken = jsonElement != null ? object.get(
-					"refresh_token").getAsString() : null;
-                        /** News **/
-                        JsonElement jsonElementExpires = object.get("expires_in");
-                        this.expiresIn = jsonElementExpires != null ? Long.parseLong(object.get(
-					"expires_in").getAsString()): null;
-                        
-                        JsonElement jsonElementScope = object.get("scope");
-                        this.scope = jsonElementScope != null ? object.get(
-					"scope").getAsString() : null;
-                        
-                        JsonElement jsonElementUserID = object.get("user_id");
-                        this.userId = jsonElementUserID != null ? object.get(
-					"user_id").getAsString() : null;
-                        
-                        JsonElement jsonElementToken = object.get("token_type");
-                        this.tokenType = jsonElementToken != null ? object.get(
-					"token_type").getAsString() : null;
-                        
-		} else {
-			throw new AuthorizationFailure(object.get("message").getAsString());
-		}
+                    if (response.getStatusCode() == 200) {
 
-	}
+                            this.accessToken = object.get("access_token").getAsString();
 
-    private boolean hasRefreshToken() {
-    	return this.refreshToken != null && !this.refreshToken.isEmpty();
-    }
+                            JsonElement jsonElement = object.get("refresh_token");
+                            this.refreshToken = jsonElement != null ? object.get(
+                                            "refresh_token").getAsString() : null;
+                            /** News **/
+                            JsonElement jsonElementExpires = object.get("expires_in");
+                            this.expiresIn = jsonElementExpires != null ? Long.parseLong(object.get(
+                                            "expires_in").getAsString()): null;
+
+                            JsonElement jsonElementScope = object.get("scope");
+                            this.scope = jsonElementScope != null ? object.get(
+                                            "scope").getAsString() : null;
+
+                            JsonElement jsonElementUserID = object.get("user_id");
+                            this.userId = jsonElementUserID != null ? object.get(
+                                            "user_id").getAsString() : null;
+
+                            JsonElement jsonElementToken = object.get("token_type");
+                            this.tokenType = jsonElementToken != null ? object.get(
+                                            "token_type").getAsString() : null;
+
+                    } else {
+                            throw new AuthorizationFailure(object.get("message").getAsString());
+                    }
+
+            }
+
+        private boolean hasRefreshToken() {
+            return this.refreshToken != null && !this.refreshToken.isEmpty();
+        }
 
 	public Response post(String path, FluentStringsMap params, String body)
 			throws MeliException {
@@ -315,11 +315,11 @@ public class Meli {
 		return response;
 	}
 
-    public BoundRequestBuilder head(String path) {
-    	return null;
-    }
+        public BoundRequestBuilder head(String path) {
+            return null;
+        }
 
-    public BoundRequestBuilder options(String path) {
-    	return null;
-    }
+        public BoundRequestBuilder options(String path) {
+            return null;
+        }
 }
