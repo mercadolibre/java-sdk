@@ -152,8 +152,7 @@ public class Meli {
 				.setQueryParameters(params);
 	}
 
-	public Response get(String path, FluentStringsMap params)
-			throws MeliException {
+	public Response get(String path, FluentStringsMap params) throws MeliException {
 		BoundRequestBuilder r = prepareGet(path, params);
 
 		Response response;
@@ -201,8 +200,7 @@ public class Meli {
                     }
         }
 
-            public void authorize(String code, String redirectUri)
-                            throws AuthorizationFailure {
+        public void authorize(String code, String redirectUri) throws AuthorizationFailure {
                     FluentStringsMap params = new FluentStringsMap();
 
                     params.add("grant_type", "authorization_code");
@@ -273,8 +271,7 @@ public class Meli {
             return this.refreshToken != null && !this.refreshToken.isEmpty();
         }
 
-	public Response post(String path, FluentStringsMap params, String body)
-			throws MeliException {
+	public Response post(String path, FluentStringsMap params, String body) throws MeliException {
 		BoundRequestBuilder r = preparePost(path, params, body);
 
 		Response response;
@@ -287,8 +284,7 @@ public class Meli {
 		return response;
 	}
 
-	public Response put(String path, FluentStringsMap params, String body)
-			throws MeliException {
+	public Response put(String path, FluentStringsMap params, String body) throws MeliException {
 		BoundRequestBuilder r = preparePut(path, params, body);
 
 		Response response;
@@ -301,8 +297,7 @@ public class Meli {
 		return response;
 	}
 
-	public Response delete(String path, FluentStringsMap params)
-			throws MeliException {
+	public Response delete(String path, FluentStringsMap params) throws MeliException {
 		BoundRequestBuilder r = prepareDelete(path, params);
 
 		Response response;
