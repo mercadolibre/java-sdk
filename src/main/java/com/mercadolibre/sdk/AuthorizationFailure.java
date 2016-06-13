@@ -5,7 +5,8 @@ public class AuthorizationFailure extends Exception {
 
     public AuthorizationFailure(String message) {
 	super(message);
-    }
+
+    }     
 
     public AuthorizationFailure(Throwable cause) {
 	super(cause);

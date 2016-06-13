@@ -19,7 +19,8 @@ public class MeliTest extends Assert {
 
     @Test(expected = AuthorizationFailure.class)
     public void testAuthorizationFailure() throws AuthorizationFailure {
-	Meli.apiUrl = "http://localhost:3000";
+
+        Meli.apiUrl = "https://api.mercadolibre.com";
 
 	new Meli(123456l, "client secret").authorize("bad code",
 		"http://someurl.com");
@@ -27,8 +28,8 @@ public class MeliTest extends Assert {
 
     @Test
     public void testAuthorizationSuccess() throws AuthorizationFailure {
-	Meli.apiUrl = "http://localhost:3000";
 
+	Meli.apiUrl = "https://api.mercadolibre.com";
 	Meli m = new Meli(123456l, "client secret");
 	m.authorize("valid code with refresh token", "http://someurl.com");
 
@@ -38,8 +39,7 @@ public class MeliTest extends Assert {
 
     @Test
     public void testGet() throws MeliException, IOException {
-	Meli.apiUrl = "http://localhost:3000";
-
+	Meli.apiUrl = "https://api.mercadolibre.com";
 	Meli m = new Meli(123456l, "client secret", "valid token");
 
 	Response response = m.get("/sites");
@@ -50,8 +50,7 @@ public class MeliTest extends Assert {
 
     @Test
     public void testGetWithRefreshToken() throws MeliException, IOException {
-	Meli.apiUrl = "http://localhost:3000";
-
+	Meli.apiUrl = "https://api.mercadolibre.com";
 	Meli m = new Meli(123456l, "client secret", "expired token",
 		"valid refresh token");
 
