@@ -70,13 +70,28 @@ public class MeliTest {
     }
 
     @Test
-    public void get_withExistingEndpoint_returnsSuccessfulResponse() throws MeliException, IOException, ExecutionException, InterruptedException {
+    public void get_withExistingEndpointAndNoParams_returnsSuccessfulResponse() throws MeliException, IOException, ExecutionException, InterruptedException {
         String jsonResponse = getFileContent("get_sites_success.json");
         MeliHttpDaoImpl.apiUrl = "https://api.mercadolibre.com";
         int statusCode = 200;
         mockHttpRequest(jsonResponse, statusCode, HttpMethod.GET, null);
 
         Response response = meli.get("/sites");
+
+        assertEquals(200, response.getStatusCode());
+        assertEquals(jsonResponse, response.getResponseBody());
+    }
+
+    @Test
+    public void get_withExistingEndpointAndParams_returnsSuccessfulResponse() throws MeliException, IOException, ExecutionException, InterruptedException {
+        String jsonResponse = getFileContent("get_custid_success.json");
+        MeliHttpDaoImpl.apiUrl = "https://api.mercadolibre.com";
+        int statusCode = 200;
+        mockHttpRequest(jsonResponse, statusCode, HttpMethod.GET, null);
+        FluentStringsMap params = new FluentStringsMap();
+        params.add("access_token", meli.getAccessToken());
+
+        Response response = meli.get("/sites", params);
 
         assertEquals(200, response.getStatusCode());
         assertEquals(jsonResponse, response.getResponseBody());

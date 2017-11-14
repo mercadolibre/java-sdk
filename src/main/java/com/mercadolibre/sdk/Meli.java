@@ -164,7 +164,7 @@ public class Meli {
         params.add("code", code);
         params.add("redirect_uri", redirectUri);
 
-        Response response = meliHttpDao.post("/oauth/token", params);
+        Response response = post("/oauth/token", params);
 
         parseToken(response);
     }
