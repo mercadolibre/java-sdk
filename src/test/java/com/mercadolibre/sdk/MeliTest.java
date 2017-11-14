@@ -22,26 +22,16 @@ import static org.mockito.Mockito.mock;
 public class MeliTest extends Assert {
 
     @Test
-    public void testGetAuthUrl() {
-        assertEquals(
-                "https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=123456&redirect_uri=http%3A%2F%2Fsomeurl.com",
-                new Meli(123456l, "client secret")
-                        .getAuthUrl("http://someurl.com", Meli.AuthUrls.MLA));
-    }
+    public void getAuthUrl_returnsAuthUrl() {
+        Meli meli = new Meli(123456L, "client secret");
 
-    @Test(expected = AuthorizationFailure.class)
-    public void testAuthorizationFailure() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
-        String jsonResponse = getFileContent("src/test/resources/api_responses/authorization_bad_request.json");
-        int statusCode = 400;
-        Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(123456l, "client secret");
-        mockHttpPostRequest(meli, jsonResponse, statusCode);
+        String authUrl = meli.getAuthUrl("http://someurl.com", Meli.AuthUrls.MLA);
 
-        meli.authorize("bad code", "http://someurl.com");
+        assertEquals("https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=123456&redirect_uri=http%3A%2F%2Fsomeurl.com", authUrl);
     }
 
     @Test
-    public void testAuthorizationSuccess() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
+    public void authorize_withValidCode_returnsAccessToken() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
         String jsonResponse = getFileContent("src/test/resources/api_responses/authorization_success.json");
         int statusCode = 200;
         Meli.apiUrl = "https://api.mercadolibre.com";
@@ -54,11 +44,22 @@ public class MeliTest extends Assert {
         assertEquals("TG-5005b6b3e4b07e60756a3353", meli.getRefreshToken());
     }
 
+    @Test(expected = AuthorizationFailure.class)
+    public void authorize_withInvalidCode_throwsAuthorizationFailureException() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
+        String jsonResponse = getFileContent("src/test/resources/api_responses/authorization_bad_request.json");
+        int statusCode = 400;
+        Meli.apiUrl = "https://api.mercadolibre.com";
+        Meli meli = new Meli(1234561L, "client secret");
+        mockHttpPostRequest(meli, jsonResponse, statusCode);
+
+        meli.authorize("bad code", "http://someurl.com");
+    }
+
     @Test
-    public void testGet() throws MeliException, IOException, ExecutionException, InterruptedException {
+    public void get_withExistingEndpoint_returnsCorrectResponse() throws MeliException, IOException, ExecutionException, InterruptedException {
         String jsonResponse = getFileContent("src/test/resources/api_responses/get_sites_success.json");
         Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(123456l, "client secret", "valid token");
+        Meli meli = new Meli(1234561L, "client secret", "valid token");
         int statusCode = 200;
         mockHttpGetRequest(meli, jsonResponse, statusCode);
 
@@ -71,12 +72,12 @@ public class MeliTest extends Assert {
     @Test
     public void testGetWithRefreshToken() throws MeliException, IOException {
         Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli m = new Meli(123456l, "client secret", "expired token",
+        Meli meli = new Meli(123456l, "client secret", "expired token",
                 "valid refresh token");
 
         FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", m.getAccessToken());
-        Response response = m.get("/users/me", params);
+        params.add("access_token", meli.getAccessToken());
+        Response response = meli.get("/users/me", params);
 
         assertEquals(200, response.getStatusCode());
         assertFalse(response.getResponseBody().isEmpty());
