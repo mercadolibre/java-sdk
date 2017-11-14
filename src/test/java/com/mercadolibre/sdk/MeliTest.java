@@ -84,51 +84,23 @@ public class MeliTest extends Assert {
         assertEquals(jsonResponse, response.getResponseBody());
     }
 
-    public void testPostWithRefreshToken() throws MeliException {
-        Meli m = new Meli(123456l, "client secret", "expired token",
-                "valid refresh token");
+    @Test
+    public void put_withExistingItem_returnsSuccessfulResponse() throws MeliException, InterruptedException, ExecutionException, IOException {
+        int statusCode = 200;
+        Meli meli = new Meli(1234561L, "client secret", "valid token");
+        String body = "{\"tags\":[\"immediate_payment\"]}";
+
+        mockHttpPutRequestWithBody(meli, "", statusCode, body);
 
         FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", m.getAccessToken());
-        Response r = m.post("/items", params, "{\"foo\":\"bar\"}");
+        params.add("access_token", meli.getAccessToken());
+            Response response = meli.put("/items/123", params, "{\"tags\":[\"immediate_payment\"]}");
 
-        assertEquals(201, r.getStatusCode());
-    }
-
-    public void testPut() throws MeliException {
-        Meli m = new Meli(123456l, "client secret", "valid token");
-
-        FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", m.getAccessToken());
-        Response r = m.put("/items/123", params, "{\"foo\":\"bar\"}");
-
-        assertEquals(200, r.getStatusCode());
-    }
-
-    public void testPutWithRefreshToken() throws MeliException {
-        Meli m = new Meli(123456l, "client secret", "expired token",
-                "valid refresh token");
-
-        FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", m.getAccessToken());
-        Response r = m.put("/items/123", params, "{\"foo\":\"bar\"}");
-
-        assertEquals(200, r.getStatusCode());
+        assertEquals(200, response.getStatusCode());
     }
 
     public void testDelete() throws MeliException {
         Meli m = new Meli(123456l, "client secret", "valid token");
-
-        FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", m.getAccessToken());
-        Response r = m.delete("/items/123", params);
-
-        assertEquals(200, r.getStatusCode());
-    }
-
-    public void testDeleteWithRefreshToken() throws MeliException {
-        Meli m = new Meli(123456l, "client secret", "expired token",
-                "valid refresh token");
 
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", m.getAccessToken());
@@ -198,6 +170,28 @@ public class MeliTest extends Assert {
 
         AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
         given(asyncHttpClientMock.prepareGet(anyString())).willReturn(boundRequestBuilderMock);
+
+        meli.setHttp(asyncHttpClientMock);
+    }
+
+    private void mockHttpPutRequestWithBody(Meli meli, String jsonResponse, int statusCode, String body) throws IOException, ExecutionException, InterruptedException {
+        Response responseMock = mock(Response.class);
+        given(responseMock.getStatusCode()).willReturn(statusCode);
+        given(responseMock.getResponseBody()).willReturn(jsonResponse);
+
+        ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
+        given(listenableFutureMock.get()).willReturn(responseMock);
+
+        AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
+        given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.setHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.setBody(body)).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.setBodyEncoding(anyString())).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
+
+        AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
+        given(asyncHttpClientMock.preparePut(anyString())).willReturn(boundRequestBuilderMock);
 
         meli.setHttp(asyncHttpClientMock);
     }
