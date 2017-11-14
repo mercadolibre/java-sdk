@@ -144,7 +144,8 @@ public class Meli {
         return http.preparePost(apiUrl + path)
                 .addHeader("Accept", "application/json")
                 .setQueryParameters(params)
-                .setHeader("Content-Type", "application/json").setBody(body)
+                .setHeader("Content-Type", "application/json")
+                .setBody(body)
                 .setBodyEncoding("UTF-8");
     }
 
