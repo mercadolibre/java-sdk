@@ -70,20 +70,6 @@ public class MeliTest extends Assert {
     }
 
     @Test
-    public void testGetWithRefreshToken() throws MeliException, IOException {
-        Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(123456l, "client secret", "expired token",
-                "valid refresh token");
-
-        FluentStringsMap params = new FluentStringsMap();
-        params.add("access_token", meli.getAccessToken());
-        Response response = meli.get("/users/me", params);
-
-        assertEquals(200, response.getStatusCode());
-        assertFalse(response.getResponseBody().isEmpty());
-    }
-
-    @Test
     public void testErrorHandling() throws IOException, MeliException {
         Meli m = new Meli(123456l, "client secret", "invalid token");
 
