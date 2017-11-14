@@ -23,7 +23,7 @@ public class Meli {
      * Availables auth sites. One user - application can only operate in one site
      */
 
-    public static enum AuthUrls {
+    public enum AuthUrls {
         MLA("https://auth.mercadolibre.com.ar"), // Argentina
         MLB("https://auth.mercadolivre.com.br"), // Brasil
         MCO("https://auth.mercadolibre.com.co"), // Colombia
@@ -41,7 +41,7 @@ public class Meli {
         private String value;
 
 
-        private AuthUrls(String value) {
+        AuthUrls(String value) {
             this.value = value;
         }
 
@@ -49,8 +49,6 @@ public class Meli {
             return value;
         }
     }
-
-    ;
 
     private String accessToken;
     private String refreshToken;
@@ -238,10 +236,6 @@ public class Meli {
             throw new AuthorizationFailure(object.get("message").getAsString());
         }
 
-    }
-
-    private boolean hasRefreshToken() {
-        return this.refreshToken != null && !this.refreshToken.isEmpty();
     }
 
 }
