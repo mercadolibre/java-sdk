@@ -1,12 +1,22 @@
 package com.mercadolibre.sdk;
 
-import java.io.IOException;
-
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.FluentStringsMap;
+import com.ning.http.client.ListenableFuture;
+import com.ning.http.client.Response;
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ning.http.client.FluentStringsMap;
-import com.ning.http.client.Response;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
+
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
 
 public class MeliTest extends Assert {
 
@@ -19,12 +29,13 @@ public class MeliTest extends Assert {
     }
 
     @Test(expected = AuthorizationFailure.class)
-    public void testAuthorizationFailure() throws AuthorizationFailure {
-
+    public void testAuthorizationFailure() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
+        String jsonResponse = getFileContent("src/test/resources/api_responses/authorization_bad_request.json");
         Meli.apiUrl = "https://api.mercadolibre.com";
+        Meli meli = new Meli(123456l, "client secret");
+        mockHttpRequest(meli, jsonResponse);
 
-        new Meli(123456l, "client secret").authorize("bad code",
-                "http://someurl.com");
+        meli.authorize("bad code", "http://someurl.com");
     }
 
     @Test
@@ -145,4 +156,28 @@ public class MeliTest extends Assert {
 
         assertEquals(200, r.getStatusCode());
     }
+
+    private String getFileContent(String filePath) throws IOException {
+        InputStream inputStream = new FileInputStream(filePath);
+        return IOUtils.toString(inputStream, "UTF-8");
+    }
+
+    private void mockHttpRequest(Meli meli, String jsonResponse) throws IOException, ExecutionException, InterruptedException {
+        Response responseMock = mock(Response.class);
+        given(responseMock.getResponseBody()).willReturn(jsonResponse);
+
+        ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
+        given(listenableFutureMock.get()).willReturn(responseMock);
+
+        AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
+        given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
+        given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
+
+        AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
+        given(asyncHttpClientMock.preparePost(anyString())).willReturn(boundRequestBuilderMock);
+
+        meli.setHttp(asyncHttpClientMock);
+    }
+
 }
