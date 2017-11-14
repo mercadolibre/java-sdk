@@ -117,6 +117,10 @@ public class Meli {
         return this.tokenType;
     }
 
+    public void setHttp(AsyncHttpClient http) {
+        this.http = http;
+    }
+
     public Response get(String path) throws MeliException {
         return get(path, new FluentStringsMap());
     }
