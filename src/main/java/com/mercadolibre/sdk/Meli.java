@@ -1,23 +1,21 @@
 package com.mercadolibre.sdk;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.concurrent.ExecutionException;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.mercadolibre.sdk.dao.MeliHttpDao;
+import com.mercadolibre.sdk.dao.impl.MeliHttpDaoImpl;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
-import com.ning.http.client.AsyncHttpClient.BoundRequestBuilder;
 import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.Response;
 
-public class Meli {
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
-    public static String apiUrl = "https://api.mercadolibre.com";
+public class Meli {
 
     /**
      * Availables auth sites. One user - application can only operate in one site
@@ -56,7 +54,6 @@ public class Meli {
     private String refreshToken;
     private Long clientId;
     private String clientSecret;
-    private AsyncHttpClient http;
     /**
      * news
      **/
@@ -64,12 +61,13 @@ public class Meli {
     private String scope;
     private String userId;
     private String tokenType;
+    private MeliHttpDao meliHttpDao;
 
 
     {
         AsyncHttpClientConfig cf = new AsyncHttpClientConfig.Builder()
                 .setUserAgent("MELI-JAVA-SDK-0.0.4").build();
-        http = new AsyncHttpClient(cf);
+        meliHttpDao = new MeliHttpDaoImpl(new AsyncHttpClient(cf));
     }
 
     public Meli(Long clientId, String clientSecret) {
@@ -117,67 +115,8 @@ public class Meli {
         return this.tokenType;
     }
 
-    public void setHttp(AsyncHttpClient http) {
-        this.http = http;
-    }
-
-    public Response get(String path) throws MeliException {
-        return get(path, new FluentStringsMap());
-    }
-
-    private BoundRequestBuilder prepareGet(String path, FluentStringsMap params) {
-        return http.prepareGet(apiUrl + path)
-                .addHeader("Accept", "application/json")
-                .setQueryParameters(params);
-    }
-
-
-    private BoundRequestBuilder prepareDelete(String path,
-                                              FluentStringsMap params) {
-        return http.prepareDelete(apiUrl + path)
-                .addHeader("Accept", "application/json")
-                .setQueryParameters(params);
-    }
-
-    private BoundRequestBuilder preparePost(String path,
-                                            FluentStringsMap params, String body) {
-        return http.preparePost(apiUrl + path)
-                .addHeader("Accept", "application/json")
-                .setQueryParameters(params)
-                .setHeader("Content-Type", "application/json")
-                .setBody(body)
-                .setBodyEncoding("UTF-8");
-    }
-
-    private BoundRequestBuilder preparePut(String path,
-                                           FluentStringsMap params, String body) {
-        return http.preparePut(apiUrl + path)
-                .addHeader("Accept", "application/json")
-                .setQueryParameters(params)
-                .setHeader("Content-Type", "application/json").setBody(body)
-                .setBodyEncoding("UTF-8");
-    }
-
-    private BoundRequestBuilder preparePost(String path, FluentStringsMap params) {
-        return http.preparePost(apiUrl + path)
-                .addHeader("Accept", "application/json")
-                .setQueryParameters(params);
-    }
-
-
-    public Response get(String path, FluentStringsMap params) throws MeliException {
-
-        BoundRequestBuilder r = prepareGet(path, params);
-
-        Response response;
-        try {
-            response = r.execute().get();
-        } catch (Exception e) {
-            throw new MeliException(e);
-        }
-
-
-        return response;
+    public void setMeliHttpDao(MeliHttpDao meliHttpDao) {
+        this.meliHttpDao = meliHttpDao;
     }
 
     public void refreshAccessToken() throws AuthorizationFailure {
@@ -187,8 +126,8 @@ public class Meli {
         params.add("client_secret", this.clientSecret);
         params.add("refresh_token", this.refreshToken);
         try {
-            BoundRequestBuilder req = preparePost("/oauth/token", params);
-            parseToken(req);
+            Response response = meliHttpDao.post("/oauth/token", params);
+            parseToken(response);
         } catch (AuthorizationFailure e1) {
             System.out.println(e1.getMessage());
         } catch (Exception e) {
@@ -214,7 +153,7 @@ public class Meli {
         }
     }
 
-    public void authorize(String code, String redirectUri) throws AuthorizationFailure {
+    public void authorize(String code, String redirectUri) throws AuthorizationFailure, MeliException {
         FluentStringsMap params = new FluentStringsMap();
 
         params.add("grant_type", "authorization_code");
@@ -223,21 +162,39 @@ public class Meli {
         params.add("code", code);
         params.add("redirect_uri", redirectUri);
 
-        BoundRequestBuilder r = preparePost("/oauth/token", params);
+        Response response = meliHttpDao.post("/oauth/token", params);
 
-        parseToken(r);
+        parseToken(response);
     }
 
-    private void parseToken(BoundRequestBuilder r) throws AuthorizationFailure {
-        Response response = null;
-        String responseBody = "";
+    public Response get(String path) throws MeliException {
+        return meliHttpDao.get(path);
+    }
+
+    public Response get(String path, FluentStringsMap params) throws MeliException {
+        return meliHttpDao.get(path, params);
+    }
+
+    public Response post(String path, FluentStringsMap params) throws MeliException {
+        return meliHttpDao.post(path, params);
+    }
+
+    public Response post(String path, FluentStringsMap params, String body) throws MeliException {
+        return meliHttpDao.post(path, params, body);
+    }
+
+    public Response put(String path, FluentStringsMap params, String body) throws MeliException {
+        return meliHttpDao.put(path, params, body);
+    }
+
+    public Response delete(String path, FluentStringsMap params) throws MeliException {
+        return meliHttpDao.delete(path, params);
+    }
+
+    private void parseToken(Response response) throws AuthorizationFailure {
+        String responseBody;
         try {
-            response = r.execute().get();
             responseBody = response.getResponseBody();
-        } catch (InterruptedException e) {
-            throw new AuthorizationFailure(e);
-        } catch (ExecutionException e) {
-            throw new AuthorizationFailure(e);
         } catch (IOException e) {
             throw new AuthorizationFailure(e);
         }
@@ -285,54 +242,5 @@ public class Meli {
         return this.refreshToken != null && !this.refreshToken.isEmpty();
     }
 
-    public Response post(String path, FluentStringsMap params, String body) throws MeliException {
-
-        BoundRequestBuilder r = preparePost(path, params, body);
-
-        Response response;
-        try {
-            response = r.execute().get();
-        } catch (Exception e) {
-            throw new MeliException(e);
-        }
-
-
-        return response;
-    }
-
-    public Response put(String path, FluentStringsMap params, String body) throws MeliException {
-
-        BoundRequestBuilder r = preparePut(path, params, body);
-
-        Response response;
-        try {
-            response = r.execute().get();
-        } catch (Exception e) {
-            throw new MeliException(e);
-        }
-
-        return response;
-    }
-
-    public Response delete(String path, FluentStringsMap params) throws MeliException {
-        BoundRequestBuilder r = prepareDelete(path, params);
-
-        Response response;
-        try {
-            response = r.execute().get();
-        } catch (Exception e) {
-            throw new MeliException(e);
-        }
-
-        return response;
-    }
-
-    public BoundRequestBuilder head(String path) {
-        return null;
-    }
-
-    public BoundRequestBuilder options(String path) {
-        return null;
-    }
 }
 

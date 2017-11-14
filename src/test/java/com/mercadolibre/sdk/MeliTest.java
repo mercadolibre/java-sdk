@@ -1,10 +1,13 @@
 package com.mercadolibre.sdk;
 
+import com.mercadolibre.sdk.dao.MeliHttpDao;
+import com.mercadolibre.sdk.dao.impl.MeliHttpDaoImpl;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Response;
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -24,22 +27,29 @@ public class MeliTest {
         GET, POST, PUT, DELETE
     }
 
-    @Test
-    public void getAuthUrl_returnsAuthUrl() {
-        Meli meli = new Meli(123456L, "client secret");
+    private Meli meli;
+    private MeliHttpDao meliHttpDao;
 
-        String authUrl = meli.getAuthUrl("http://someurl.com", Meli.AuthUrls.MLA);
-
-        assertEquals("https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=123456&redirect_uri=http%3A%2F%2Fsomeurl.com", authUrl);
+    @Before
+    public void setUp() {
+        meli = new Meli(1234561L, "client secret", "valid token");
+        meliHttpDao = new MeliHttpDaoImpl();
+        meli.setMeliHttpDao(meliHttpDao);
     }
 
     @Test
-    public void authorize_withValidCode_returnsAccessToken() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
+    public void getAuthUrl_returnsAuthUrl() {
+        String authUrl = meli.getAuthUrl("http://someurl.com", Meli.AuthUrls.MLA);
+
+        assertEquals("https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=1234561&redirect_uri=http%3A%2F%2Fsomeurl.com", authUrl);
+    }
+
+    @Test
+    public void authorize_withValidCode_returnsAccessToken() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException, MeliException {
         String jsonResponse = getFileContent("authorization_success.json");
         int statusCode = 200;
-        Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(1234561L, "client secret");
-        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.POST, null);
+        MeliHttpDaoImpl.apiUrl = "https://api.mercadolibre.com";
+        mockHttpRequest(jsonResponse, statusCode, HttpMethod.POST, null);
 
         meli.authorize("valid code with refresh token", "http://someurl.com");
 
@@ -48,12 +58,11 @@ public class MeliTest {
     }
 
     @Test(expected = AuthorizationFailure.class)
-    public void authorize_withInvalidCode_throwsAuthorizationFailureException() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
+    public void authorize_withInvalidCode_throwsAuthorizationFailureException() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException, MeliException {
         String jsonResponse = getFileContent("authorization_bad_request.json");
         int statusCode = 400;
-        Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(1234561L, "client secret");
-        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.POST, null);
+        MeliHttpDaoImpl.apiUrl = "https://api.mercadolibre.com";
+        mockHttpRequest(jsonResponse, statusCode, HttpMethod.POST, null);
 
         meli.authorize("bad code", "http://someurl.com");
     }
@@ -61,10 +70,9 @@ public class MeliTest {
     @Test
     public void get_withExistingEndpoint_returnsSuccessfulResponse() throws MeliException, IOException, ExecutionException, InterruptedException {
         String jsonResponse = getFileContent("get_sites_success.json");
-        Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(1234561L, "client secret", "valid token");
+        MeliHttpDaoImpl.apiUrl = "https://api.mercadolibre.com";
         int statusCode = 200;
-        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.GET, null);
+        mockHttpRequest(jsonResponse, statusCode, HttpMethod.GET, null);
 
         Response response = meli.get("/sites");
 
@@ -75,12 +83,11 @@ public class MeliTest {
     @Test
     public void post_withExistingEndpoint_returnsSuccessfulResponse() throws MeliException, IOException, ExecutionException, InterruptedException {
         String jsonResponse = getFileContent("post_item_success.json");
-        Meli meli = new Meli(1234561L, "client secret", "valid token");
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", meli.getAccessToken());
         int statusCode = 201;
         String body = "{\"foo\":\"bar\"}";
-        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.POST, body);
+        mockHttpRequest(jsonResponse, statusCode, HttpMethod.POST, body);
 
         Response response = meli.post("/items", params, body);
 
@@ -91,9 +98,8 @@ public class MeliTest {
     @Test
     public void put_withExistingItem_returnsSuccessfulResponse() throws MeliException, InterruptedException, ExecutionException, IOException {
         int statusCode = 200;
-        Meli meli = new Meli(1234561L, "client secret", "valid token");
         String body = "{\"tags\":[\"immediate_payment\"]}";
-        mockHttpRequest(meli, "", statusCode, HttpMethod.PUT, body);
+        mockHttpRequest("", statusCode, HttpMethod.PUT, body);
 
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", meli.getAccessToken());
@@ -105,10 +111,9 @@ public class MeliTest {
     @Test
     public void delete_WithExistingItem_returnsSuccessfulResponse() throws MeliException, InterruptedException, ExecutionException, IOException {
         int statusCode = 200;
-        Meli meli = new Meli(1234561L, "client secret", "valid token");
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", meli.getAccessToken());
-        mockHttpRequest(meli, "", statusCode, HttpMethod.DELETE, null);
+        mockHttpRequest("", statusCode, HttpMethod.DELETE, null);
 
         Response response = meli.delete("/items/123", params);
 
@@ -120,7 +125,7 @@ public class MeliTest {
         return IOUtils.toString(inputStream, "UTF-8");
     }
 
-    private void mockHttpRequest(Meli meli, String jsonResponse, int statusCode, HttpMethod httpMethod, String body) throws IOException, ExecutionException, InterruptedException {
+    private void mockHttpRequest(String jsonResponse, int statusCode, HttpMethod httpMethod, String body) throws IOException, ExecutionException, InterruptedException {
         Response responseMock = mock(Response.class);
         given(responseMock.getStatusCode()).willReturn(statusCode);
         given(responseMock.getResponseBody()).willReturn(jsonResponse);
@@ -156,7 +161,7 @@ public class MeliTest {
                 break;
         }
 
-        meli.setHttp(asyncHttpClientMock);
+        ((MeliHttpDaoImpl) meliHttpDao).setHttpClient(asyncHttpClientMock);
     }
 
 }
