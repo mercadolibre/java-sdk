@@ -2,6 +2,7 @@ package com.mercadolibre.sdk;
 
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.FluentStringsMap;
+import com.ning.http.client.HttpResponseStatus;
 import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Response;
 import org.apache.commons.io.IOUtils;
@@ -31,22 +32,26 @@ public class MeliTest extends Assert {
     @Test(expected = AuthorizationFailure.class)
     public void testAuthorizationFailure() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
         String jsonResponse = getFileContent("src/test/resources/api_responses/authorization_bad_request.json");
+        int statusCode = 400;
         Meli.apiUrl = "https://api.mercadolibre.com";
         Meli meli = new Meli(123456l, "client secret");
-        mockHttpRequest(meli, jsonResponse);
+        mockHttpRequest(meli, jsonResponse, statusCode);
 
         meli.authorize("bad code", "http://someurl.com");
     }
 
     @Test
-    public void testAuthorizationSuccess() throws AuthorizationFailure {
-
+    public void testAuthorizationSuccess() throws AuthorizationFailure, IOException, ExecutionException, InterruptedException {
+        String jsonResponse = getFileContent("src/test/resources/api_responses/authorization_success.json");
+        int statusCode = 200;
         Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli m = new Meli(123456l, "client secret");
-        m.authorize("valid code with refresh token", "http://someurl.com");
+        Meli meli = new Meli(123456l, "client secret");
+        mockHttpRequest(meli, jsonResponse, statusCode);
 
-        assertEquals("valid token", m.getAccessToken());
-        assertEquals("valid refresh token", m.getRefreshToken());
+        meli.authorize("valid code with refresh token", "http://someurl.com");
+
+        assertEquals("APP_USR-6092-3246532-cb45c82853f6e620bb0deda096b128d3-8035443", meli.getAccessToken());
+        assertEquals("TG-5005b6b3e4b07e60756a3353", meli.getRefreshToken());
     }
 
     @Test
@@ -162,8 +167,9 @@ public class MeliTest extends Assert {
         return IOUtils.toString(inputStream, "UTF-8");
     }
 
-    private void mockHttpRequest(Meli meli, String jsonResponse) throws IOException, ExecutionException, InterruptedException {
+    private void mockHttpRequest(Meli meli, String jsonResponse, int statusCode) throws IOException, ExecutionException, InterruptedException {
         Response responseMock = mock(Response.class);
+        given(responseMock.getStatusCode()).willReturn(statusCode);
         given(responseMock.getResponseBody()).willReturn(jsonResponse);
 
         ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
