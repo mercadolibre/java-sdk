@@ -17,9 +17,12 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockingDetails;
 
 public class MeliTest extends Assert {
+
+    private enum HttpMethod {
+        GET, POST, PUT, DELETE
+    }
 
     @Test
     public void getAuthUrl_returnsAuthUrl() {
@@ -35,8 +38,8 @@ public class MeliTest extends Assert {
         String jsonResponse = getFileContent("authorization_success.json");
         int statusCode = 200;
         Meli.apiUrl = "https://api.mercadolibre.com";
-        Meli meli = new Meli(123456l, "client secret");
-        mockHttpPostRequestWithoutBody(meli, jsonResponse, statusCode);
+        Meli meli = new Meli(1234561L, "client secret");
+        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.POST, null);
 
         meli.authorize("valid code with refresh token", "http://someurl.com");
 
@@ -50,7 +53,7 @@ public class MeliTest extends Assert {
         int statusCode = 400;
         Meli.apiUrl = "https://api.mercadolibre.com";
         Meli meli = new Meli(1234561L, "client secret");
-        mockHttpPostRequestWithoutBody(meli, jsonResponse, statusCode);
+        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.POST, null);
 
         meli.authorize("bad code", "http://someurl.com");
     }
@@ -61,7 +64,7 @@ public class MeliTest extends Assert {
         Meli.apiUrl = "https://api.mercadolibre.com";
         Meli meli = new Meli(1234561L, "client secret", "valid token");
         int statusCode = 200;
-        mockHttpGetRequest(meli, jsonResponse, statusCode);
+        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.GET, null);
 
         Response response = meli.get("/sites");
 
@@ -77,7 +80,7 @@ public class MeliTest extends Assert {
         params.add("access_token", meli.getAccessToken());
         int statusCode = 201;
         String body = "{\"foo\":\"bar\"}";
-        mockHttpPostRequestWithBody(meli, jsonResponse, statusCode, body);
+        mockHttpRequest(meli, jsonResponse, statusCode, HttpMethod.POST, body);
 
         Response response = meli.post("/items", params, body);
 
@@ -90,11 +93,11 @@ public class MeliTest extends Assert {
         int statusCode = 200;
         Meli meli = new Meli(1234561L, "client secret", "valid token");
         String body = "{\"tags\":[\"immediate_payment\"]}";
-        mockHttpPutRequestWithBody(meli, "", statusCode, body);
+        mockHttpRequest(meli, "", statusCode, HttpMethod.PUT, body);
 
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", meli.getAccessToken());
-            Response response = meli.put("/items/123", params, "{\"tags\":[\"immediate_payment\"]}");
+        Response response = meli.put("/items/123", params, "{\"tags\":[\"immediate_payment\"]}");
 
         assertEquals(200, response.getStatusCode());
     }
@@ -103,9 +106,9 @@ public class MeliTest extends Assert {
     public void delete_WithExistingItem_returnsSuccessfulResponse() throws MeliException, InterruptedException, ExecutionException, IOException {
         int statusCode = 200;
         Meli meli = new Meli(1234561L, "client secret", "valid token");
-        mockHttpDeleteRequest(meli, "", statusCode);
         FluentStringsMap params = new FluentStringsMap();
         params.add("access_token", meli.getAccessToken());
+        mockHttpRequest(meli, "", statusCode, HttpMethod.DELETE, null);
 
         Response response = meli.delete("/items/123", params);
 
@@ -117,7 +120,7 @@ public class MeliTest extends Assert {
         return IOUtils.toString(inputStream, "UTF-8");
     }
 
-    private void mockHttpPostRequestWithoutBody(Meli meli, String jsonResponse, int statusCode) throws IOException, ExecutionException, InterruptedException {
+    private void mockHttpRequest(Meli meli, String jsonResponse, int statusCode, HttpMethod httpMethod, String body) throws IOException, ExecutionException, InterruptedException {
         Response responseMock = mock(Response.class);
         given(responseMock.getStatusCode()).willReturn(statusCode);
         given(responseMock.getResponseBody()).willReturn(jsonResponse);
@@ -128,92 +131,30 @@ public class MeliTest extends Assert {
         AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
         given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
         given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
+
+        if (body != null) {
+            given(boundRequestBuilderMock.setHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
+            given(boundRequestBuilderMock.setBody(body)).willReturn(boundRequestBuilderMock);
+            given(boundRequestBuilderMock.setBodyEncoding(anyString())).willReturn(boundRequestBuilderMock);
+        }
+
         given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
 
         AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
-        given(asyncHttpClientMock.preparePost(anyString())).willReturn(boundRequestBuilderMock);
-
-        meli.setHttp(asyncHttpClientMock);
-    }
-
-    private void mockHttpPostRequestWithBody(Meli meli, String jsonResponse, int statusCode, String body) throws IOException, ExecutionException, InterruptedException {
-        Response responseMock = mock(Response.class);
-        given(responseMock.getStatusCode()).willReturn(statusCode);
-        given(responseMock.getResponseBody()).willReturn(jsonResponse);
-
-        ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
-        given(listenableFutureMock.get()).willReturn(responseMock);
-
-        AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
-        given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setBody(body)).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setBodyEncoding(anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
-
-        AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
-        given(asyncHttpClientMock.preparePost(anyString())).willReturn(boundRequestBuilderMock);
-
-        meli.setHttp(asyncHttpClientMock);
-    }
-
-    private void mockHttpGetRequest(Meli meli, String jsonResponse, int statusCode) throws IOException, ExecutionException, InterruptedException {
-        Response responseMock = mock(Response.class);
-        given(responseMock.getStatusCode()).willReturn(statusCode);
-        given(responseMock.getResponseBody()).willReturn(jsonResponse);
-
-        ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
-        given(listenableFutureMock.get()).willReturn(responseMock);
-
-        AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
-        given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
-
-        AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
-        given(asyncHttpClientMock.prepareGet(anyString())).willReturn(boundRequestBuilderMock);
-
-        meli.setHttp(asyncHttpClientMock);
-    }
-
-    private void mockHttpPutRequestWithBody(Meli meli, String jsonResponse, int statusCode, String body) throws IOException, ExecutionException, InterruptedException {
-        Response responseMock = mock(Response.class);
-        given(responseMock.getStatusCode()).willReturn(statusCode);
-        given(responseMock.getResponseBody()).willReturn(jsonResponse);
-
-        ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
-        given(listenableFutureMock.get()).willReturn(responseMock);
-
-        AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
-        given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setBody(body)).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setBodyEncoding(anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
-
-        AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
-        given(asyncHttpClientMock.preparePut(anyString())).willReturn(boundRequestBuilderMock);
-
-        meli.setHttp(asyncHttpClientMock);
-    }
-
-    private void mockHttpDeleteRequest(Meli meli, String jsonResponse, int statusCode) throws IOException, ExecutionException, InterruptedException {
-        Response responseMock = mock(Response.class);
-        given(responseMock.getStatusCode()).willReturn(statusCode);
-        given(responseMock.getResponseBody()).willReturn(jsonResponse);
-
-        ListenableFuture listenableFutureMock = mock(ListenableFuture.class);
-        given(listenableFutureMock.get()).willReturn(responseMock);
-
-        AsyncHttpClient.BoundRequestBuilder boundRequestBuilderMock = mock(AsyncHttpClient.BoundRequestBuilder.class);
-        given(boundRequestBuilderMock.addHeader(anyString(), anyString())).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.setQueryParameters(any(FluentStringsMap.class))).willReturn(boundRequestBuilderMock);
-        given(boundRequestBuilderMock.execute()).willReturn(listenableFutureMock);
-
-        AsyncHttpClient asyncHttpClientMock = mock(AsyncHttpClient.class);
-        given(asyncHttpClientMock.prepareDelete(anyString())).willReturn(boundRequestBuilderMock);
+        switch (httpMethod) {
+            case GET:
+                given(asyncHttpClientMock.prepareGet(anyString())).willReturn(boundRequestBuilderMock);
+                break;
+            case POST:
+                given(asyncHttpClientMock.preparePost(anyString())).willReturn(boundRequestBuilderMock);
+                break;
+            case PUT:
+                given(asyncHttpClientMock.preparePut(anyString())).willReturn(boundRequestBuilderMock);
+                break;
+            case DELETE:
+                given(asyncHttpClientMock.prepareDelete(anyString())).willReturn(boundRequestBuilderMock);
+                break;
+        }
 
         meli.setHttp(asyncHttpClientMock);
     }
