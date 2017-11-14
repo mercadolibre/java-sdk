@@ -5,7 +5,6 @@ import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Response;
 import org.apache.commons.io.IOUtils;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -13,12 +12,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 
-public class MeliTest extends Assert {
+public class MeliTest {
 
     private enum HttpMethod {
         GET, POST, PUT, DELETE
