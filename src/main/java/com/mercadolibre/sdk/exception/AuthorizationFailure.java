@@ -1,4 +1,4 @@
-package com.mercadolibre.sdk;
+package com.mercadolibre.sdk.exception;
 
 public class AuthorizationFailure extends Exception {
 

@@ -6,6 +6,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.mercadolibre.sdk.dao.MeliHttpDao;
 import com.mercadolibre.sdk.dao.impl.MeliHttpDaoImpl;
+import com.mercadolibre.sdk.exception.AuthorizationFailure;
+import com.mercadolibre.sdk.exception.MeliException;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.FluentStringsMap;

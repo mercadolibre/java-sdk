@@ -2,6 +2,8 @@ package com.mercadolibre.sdk;
 
 import com.mercadolibre.sdk.dao.MeliHttpDao;
 import com.mercadolibre.sdk.dao.impl.MeliHttpDaoImpl;
+import com.mercadolibre.sdk.exception.AuthorizationFailure;
+import com.mercadolibre.sdk.exception.MeliException;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.ListenableFuture;

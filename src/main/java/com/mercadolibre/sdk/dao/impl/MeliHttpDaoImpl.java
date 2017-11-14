@@ -1,6 +1,6 @@
 package com.mercadolibre.sdk.dao.impl;
 
-import com.mercadolibre.sdk.MeliException;
+import com.mercadolibre.sdk.exception.MeliException;
 import com.mercadolibre.sdk.dao.MeliHttpDao;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClient.BoundRequestBuilder;

@@ -1,6 +1,6 @@
 package com.mercadolibre.sdk.dao;
 
-import com.mercadolibre.sdk.MeliException;
+import com.mercadolibre.sdk.exception.MeliException;
 import com.ning.http.client.FluentStringsMap;
 import com.ning.http.client.Response;
 
