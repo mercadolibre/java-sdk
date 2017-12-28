@@ -106,6 +106,13 @@ params.add("access_token", m.getAccessToken());
 Response r = m.delete("/items/123", params);
 ```
 
+## Are there more examples?
+Yes! All you have to do is get inside mockapi directory. and run:
+
+```node app.js```
+
+The example app will be listening on port 3000, and you can interact with all the examples we provide.
+
 ## Do I always need to include the ```access_token``` as a parameter?
 No. Actually most ```GET``` requests don't need an ```access_token``` and it is easier to avoid them and also it is better in terms of caching.
 But this decision is left to you. You should decide when it is necessary to include it or not.
