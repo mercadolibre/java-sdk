@@ -99,7 +99,6 @@ app.get('/users/me', function (req, res) {
  * */
 
 app.get('/categories/MLA123/attributes', function (req, res) {
-    */
     res.send([{
         "id": "SELLER_SKU",
         "name": "SKU ",
