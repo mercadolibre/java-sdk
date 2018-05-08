@@ -51,7 +51,7 @@ There are some design considerations worth to mention.
 1. This SDK is just a thin layer on top of an http client to handle all the OAuth WebServer flow for you.
 2. There is no JSON parsing. This is left to you. But this SDK will include [gson](http://code.google.com/p/google-gson/) library for internal usage.
 
-## How do I redirect users to authorize my application?
+## How do I redirect users to authorize my application?
 
 This is a 2 step process.
 
