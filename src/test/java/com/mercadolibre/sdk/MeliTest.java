@@ -14,11 +14,11 @@ public class MeliTest extends Assert {
 	assertEquals(
 		"https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=123456&redirect_uri=http%3A%2F%2Fsomeurl.com",
 		new Meli(123456l, "client secret")
-			.getAuthUrl("http://someurl.com", Meli.AuthUrls.MLA));
+			.getAuthUrl("http://someurl.com", AuthUrls.MLA));
     }
 
-    @Test(expected = AuthorizationFailure.class)
-    public void testAuthorizationFailure() throws AuthorizationFailure {
+    @Test(expected = AuthorizationFailureException.class)
+    public void testAuthorizationFailure() throws AuthorizationFailureException {
 
         Meli.apiUrl = "https://api.mercadolibre.com";
 
@@ -27,7 +27,7 @@ public class MeliTest extends Assert {
     }
 
     @Test
-    public void testAuthorizationSuccess() throws AuthorizationFailure {
+    public void testAuthorizationSuccess() throws AuthorizationFailureException {
 
 	Meli.apiUrl = "https://api.mercadolibre.com";
 	Meli m = new Meli(123456l, "client secret");
