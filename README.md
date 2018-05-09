@@ -13,12 +13,12 @@ Just add to your pom the following repository
 
 ```xml
 <repositories>
-        ...
-        <repository>
-                <id>mercadolibre-snapshots</id>
-                <url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
-        </repository>
-        ...
+    ...
+    <repository>
+        <id>mercadolibre-snapshots</id>
+        <url>https://githubcom/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
+    </repository>
+    ...
 </repositories>
 ```
 
@@ -26,15 +26,13 @@ And then add your dependency
 
 ```xml
 <dependencies>
-        ...
-        <dependency>
-                <groupId>com.mercadolibre</groupId>
-                <artifactId>sdk</artifactId>
-
-                <version>0.0.3-SNAPSHOT</version>
-
-        </dependency>
-        ...
+    ...
+    <dependency>
+        <groupId>com.mercadolibre</groupId>
+        <artifactId>sdk</artifactId>
+        <version>0.0.3-SNAPSHOT</version>
+    </dependency>
+    ...
 </dependencies>
 ```
 
@@ -42,18 +40,18 @@ And that's it!
 
 ## How do I start using it?
 
-The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/application-manager/)
-
+The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/application-manager/).
+
 ```java
-Meli m = new Meli(1234, "a secret");
+Meli m = new Meli(1234L, "a secret");
 ```
 With this instance you can start working on MercadoLibre's APIs.
 
 There are some design considerations worth to mention.
 1. This SDK is just a thin layer on top of an http client to handle all the OAuth WebServer flow for you.
-2. There is no JSON parsing. This is left to you. But this SDK will include [gson](http://code.google.com/p/google-gson/) library for internal usage.
+2. There is no JSON parsing. This is left to you. But this SDK will include [gson](http://code.google.com/p/google-gson/) library for internal usage.
 
-## How do I redirect users to authorize my application?
+## How do I redirect users to authorize my application?
 
 This is a 2 step process.
 
@@ -61,7 +59,7 @@ First get the link to redirect the user. This is very easy! Just:
 
 ```java
 
-String redirectUrl = m.getAuthUrl("http://somecallbackurl",Meli.AuthUrls.MLB); //Don't forget to set the autentication URL of your country
+String redirectUrl = m.getAuthUrl("http://somecallbackurl", AuthUrls.MLB); //Don't forget to set the autentication URL of your country
 ```
 
 This will give you the url to redirect the user. You need to specify a callback url which will be the one that the user will redirected after a successfull authrization process.
