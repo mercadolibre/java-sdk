@@ -18,21 +18,6 @@ To deploy it to a remote Maven repository instead, configure the settings of the
 mvn deploy
 ```
 
-Refer to the [official documentation](https://maven.apache.org/plugins/maven-deploy-plugin/usage.html) for more information.
-
-### Maven users
-****
-Add this dependency to your project's POM:
-
-```xml
-<dependency>
-    <groupId>io.mercadolibre</groupId>
-    <artifactId>java-client-sdk</artifactId>
-    <version>5.0.0</version>
-    <scope>compile</scope>
-</dependency>
-```
-
 ### Others
 
 At first generate the JAR by executing:
