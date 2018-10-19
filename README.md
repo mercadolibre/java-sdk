@@ -1,134 +1,274 @@
-# MercadoLibre's Java SDK
+# Java Client SDK
 
-This is the official Java SDK for MercadoLibre's Platform.
+## Requirements
 
-## How do I install it?
+Building the API client library requires [Maven](https://maven.apache.org/) to be installed.
 
-You can download the latest build at: 
-    https://github.com/mercadolibre/java-sdk/archive/master.zip
+## Installation
 
-How do I install it using maven:
+To install the API client library to your local Maven repository, simply execute:
 
-Just add to your pom the following repository
+```shell
+mvn install
+```
+
+To deploy it to a remote Maven repository instead, configure the settings of the repository and execute:
+
+```shell
+mvn deploy
+```
+
+Refer to the [official documentation](https://maven.apache.org/plugins/maven-deploy-plugin/usage.html) for more information.
+
+### Maven users
+****
+Add this dependency to your project's POM:
 
 ```xml
-<repositories>
-        ...
-        <repository>
-                <id>mercadolibre-snapshots</id>
-                <url>https://github.com/mercadolibre/java-sdk-repo/raw/master/snapshots</url>
-        </repository>
-        ...
-</repositories>
+<dependency>
+    <groupId>io.mercadolibre</groupId>
+    <artifactId>java-client-sdk</artifactId>
+    <version>5.0.0</version>
+    <scope>compile</scope>
+</dependency>
 ```
 
-And then add your dependency
+### Others
 
-```xml
-<dependencies>
-        ...
-        <dependency>
-                <groupId>com.mercadolibre</groupId>
-                <artifactId>sdk</artifactId>
+At first generate the JAR by executing:
 
-                <version>0.0.3-SNAPSHOT</version>
+    mvn package
 
-        </dependency>
-        ...
-</dependencies>
-```
+Then manually install the following JARs:
 
-And that's it!
+* target/java-client-sdk-master.jar
+* target/lib/*.jar
 
-## How do I start using it?
+## Getting Started
 
-The first thing to do is to instance a ```Meli``` class. You'll need to give a ```clientId``` and a ```clientSecret```. You can obtain both after creating your own application. For more information on this please read: [creating an application](http://developers.mercadolibre.com/application-manager/)
-
-```java
-Meli m = new Meli(1234, "a secret");
-```
-With this instance you can start working on MercadoLibre's APIs.
-
-There are some design considerations worth to mention.
-1. This SDK is just a thin layer on top of an http client to handle all the OAuth WebServer flow for you.
-2. There is no JSON parsing. This is left to you. But this SDK will include [gson](http://code.google.com/p/google-gson/) library for internal usage.
-
-## How do I redirect users to authorize my application?
-
-This is a 2 step process.
-
-First get the link to redirect the user. This is very easy! Just:
+Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
 
-String redirectUrl = m.getAuthUrl("http://somecallbackurl",Meli.AuthUrls.MLB); //Don't forget to set the autentication URL of your country
+import io.swagger.client.ApiException;
+import io.swagger.client.api.DefaultApi;
+import io.swagger.client.model.*;
+
+
+public class DefaultApiExample {
+
+/*Replace with your application Client Id, Client Secret and RedirectUri*/
+
+    Long ClientId = 0;  
+    String SecretKey = "abc123";
+    String redirectUri = "https://your_url.com";
+    
+    private final DefaultApi api = new DefaultApi();
+    
+    private static void getAuthUrl() throws UnsupportedEncodingException {
+           DefaultApi api = new DefaultApi(new ApiClient(), clientId, clientSecret);
+           String response = api.getAuthUrl(redirectUri, Configuration.AuthUrls.{your_site_id});
+    }
+    
+    private static void getAccessToken() throws UnsupportedEncodingException {
+               DefaultApi api = new DefaultApi(new ApiClient(), clientId, clientSecret);
+               String code = "{your_code}";
+               AccessToken response = api.authorize(code, redirectUri);
+    }
+     
+    private static void refreshToken() throws UnsupportedEncodingException {
+                    DefaultApi api = new DefaultApi(new ApiClient(), clientId, clientSecret);
+                    String refreshToken = "{your_refresh_token}";
+                    RefreshToken response = api.refreshAccessToken(refreshToken);
+    }
+    
+    private static void GET() throws ApiException {
+            String resource = "{api_resource}";
+            Object response = api.defaultGet(resource);
+    }
+    
+    public void POST() throws ApiException {
+            String resource = "{api_resource}";
+            Object body = new Object();
+            body.field("{some_value}");
+            Object response = api.defaultPost(accessToken, resource, body);
+    }
+        
+    public void PUT() throws ApiException {
+                String id = "{object_id}";
+                String resource = "{api_resource}";
+                Object body = new Object();
+                body.field("{some_value}");
+                Object response = api.defaultPut(resource, id, accessToken, body);
+    }
+    
+    public void DELETE() throws ApiException {
+                 String id = "{object_id}";
+                 String resource = "{api_resource}";
+                 Object response = api.defaultDelete(resource, id, accessToken);
+    }
+
+}
+
 ```
 
-This will give you the url to redirect the user. You need to specify a callback url which will be the one that the user will redirected after a successfull authrization process.
+## Documentation for API Endpoints
 
-Once the user is redirected to your callback url, you'll receive in the query string, a parameter named ```code```. You'll need this for the second part of the process.
+All URIs are relative to *https://api.mercadolibre.com*
 
-```java
-m.authorize("the received code", "http://somecallbackurl");
-```
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*DefaultApi* | **defaultGet** | **GET** /{resource}/{id} | Returns details about an object.
+*DefaultApi* | **defaultPut** | **PUT** /{resource}/{id}/attributes | Updates an object.
+*DefaultApi* | **defaultPost** | **POST** /{resource}/ | Creates an object.
+*DefaultApi* | **defaultDelete** | **DELETE** /{resource}/{id} | Deletes an object.
+*DefaultApi* | [**categoriesCategoryIdAttributesGet**](docs/DefaultApi.md#categoriesCategoryIdAttributesGet) | **GET** /categories/{category_id}/attributes | Returns all attributes from a category.
+*DefaultApi* | [**categoriesCategoryIdGet**](docs/DefaultApi.md#categoriesCategoryIdGet) | **GET** /categories/{category_id} | Returns information about a category.
+*DefaultApi* | [**itemsItemIdGet**](docs/DefaultApi.md#itemsItemIdGet) | **GET** /items/{item_id} | Return item infromation.
+*DefaultApi* | [**itemsItemIdPut**](docs/DefaultApi.md#itemsItemIdPut) | **PUT** /items/{item_id} | Update an item.
+*DefaultApi* | [**itemsPost**](docs/DefaultApi.md#itemsPost) | **POST** /items | List an item.
+*DefaultApi* | [**itemsValidatePost**](docs/DefaultApi.md#itemsValidatePost) | **POST** /items/validate | Validate the JSON before listing an item.
+*DefaultApi* | [**messagesMessageIdGet**](docs/DefaultApi.md#messagesMessageIdGet) | **GET** /messages/{message_id} | Get a message by ID.
+*DefaultApi* | [**messagesOrdersOrderIdGet**](docs/DefaultApi.md#messagesOrdersOrderIdGet) | **GET** /messages/orders/{order_id} | Return all messages from a order.
+*DefaultApi* | [**messagesPost**](docs/DefaultApi.md#messagesPost) | **POST** /messages | Send a message.
+*DefaultApi* | [**ordersOrderIdGet**](docs/DefaultApi.md#ordersOrderIdGet) | **GET** /orders/{order_id} | Get an order by ID.
+*DefaultApi* | [**ordersSearchGet**](docs/DefaultApi.md#ordersSearchGet) | **GET** /orders/search | Search orders by seller or buyer.
+*DefaultApi* | [**shipmentsShipmentIdGet**](docs/DefaultApi.md#shipmentsShipmentIdGet) | **GET** /shipments/{shipment_id} | Retrieves all data to make a delivery.
+*DefaultApi* | [**sitesGet**](docs/DefaultApi.md#sitesGet) | **GET** /sites | Return all sites where MercadoLibre operates.
+*DefaultApi* | [**sitesSiteIdCategoryPredictorPredictGet**](docs/DefaultApi.md#sitesSiteIdCategoryPredictorPredictGet) | **GET** /sites/{site_id}/category_predictor/predict | Predict category by title.
+*DefaultApi* | [**sitesSiteIdGet**](docs/DefaultApi.md#sitesSiteIdGet) | **GET** /sites/{site_id} | Return information about a site.
+*DefaultApi* | [**usersMeGet**](docs/DefaultApi.md#usersMeGet) | **GET** /users/me | Return account information about the authenticated user.
+*DefaultApi* | [**usersUserIdGet**](docs/DefaultApi.md#usersUserIdGet) | **GET** /users/{user_id} | Return user account information.
 
-This will get an ```accessToken``` and a ```refreshToken``` (is case your application has the ```offline_access```) for your application and your user.
 
-At this stage your are ready to make call to the API on behalf of the user.
+## Documentation for Models
 
-## Making GET calls
+ - [Address](docs/Address.md)
+ - [AlternativePhone](docs/AlternativePhone.md)
+ - [AttributeCombinations](docs/AttributeCombinations.md)
+ - [Attributes](docs/Attributes.md)
+ - [BillData](docs/BillData.md)
+ - [Billing](docs/Billing.md)
+ - [Buy](docs/Buy.md)
+ - [BuyerReputation](docs/BuyerReputation.md)
+ - [BuyerReputationTransactions](docs/BuyerReputationTransactions.md)
+ - [Canceled](docs/Canceled.md)
+ - [Categories](docs/Categories.md)
+ - [CategoryPrediction](docs/CategoryPrediction.md)
+ - [CategoryResponse](docs/CategoryResponse.md)
+ - [CategorySettings](docs/CategorySettings.md)
+ - [City](docs/City.md)
+ - [Claims](docs/Claims.md)
+ - [Context](docs/Context.md)
+ - [Conversation](docs/Conversation.md)
+ - [CostComponents](docs/CostComponents.md)
+ - [Country](docs/Country.md)
+ - [Credit](docs/Credit.md)
+ - [Currencies](docs/Currencies.md)
+ - [DelayedHandlingTime](docs/DelayedHandlingTime.md)
+ - [Descriptions](docs/Descriptions.md)
+ - [Error](docs/Error.md)
+ - [EstimatedDeliveryExtended](docs/EstimatedDeliveryExtended.md)
+ - [EstimatedDeliveryFinal](docs/EstimatedDeliveryFinal.md)
+ - [EstimatedDeliveryLimit](docs/EstimatedDeliveryLimit.md)
+ - [EstimatedDeliveryTime](docs/EstimatedDeliveryTime.md)
+ - [EstimatedHandlingLimit](docs/EstimatedHandlingLimit.md)
+ - [EstimatedScheduleLimit](docs/EstimatedScheduleLimit.md)
+ - [From](docs/From.md)
+ - [Geolocation](docs/Geolocation.md)
+ - [Identification](docs/Identification.md)
+ - [IdentificationTypesRules](docs/IdentificationTypesRules.md)
+ - [ImmediatePayment](docs/ImmediatePayment.md)
+ - [ItemJson](docs/ItemJson.md)
+ - [ItemResponse](docs/ItemResponse.md)
+ - [ItemResponseAttributes](docs/ItemResponseAttributes.md)
+ - [ItemResponsePictures](docs/ItemResponsePictures.md)
+ - [ListImmediatePayment](docs/ListImmediatePayment.md)
+ - [Location](docs/Location.md)
+ - [Message](docs/Message.md)
+ - [MessageAttachmentsValidations](docs/MessageAttachmentsValidations.md)
+ - [MessageCreated](docs/MessageCreated.md)
+ - [MessageFrom](docs/MessageFrom.md)
+ - [MessageJSON](docs/MessageJSON.md)
+ - [MessageModeration](docs/MessageModeration.md)
+ - [MessageSearchResults](docs/MessageSearchResults.md)
+ - [MessageText](docs/MessageText.md)
+ - [MessageTo](docs/MessageTo.md)
+ - [Metrics](docs/Metrics.md)
+ - [Moderation](docs/Moderation.md)
+ - [Municipality](docs/Municipality.md)
+ - [Neighborhood](docs/Neighborhood.md)
+ - [NotYetRated](docs/NotYetRated.md)
+ - [Offset](docs/Offset.md)
+ - [Paging](docs/Paging.md)
+ - [PathFromRoot](docs/PathFromRoot.md)
+ - [Phone](docs/Phone.md)
+ - [Pictures](docs/Pictures.md)
+ - [PredictionPathFromRoot](docs/PredictionPathFromRoot.md)
+ - [Ratings](docs/Ratings.md)
+ - [ReceiverAddress](docs/ReceiverAddress.md)
+ - [ReceiverAddressCity](docs/ReceiverAddressCity.md)
+ - [ReceiverAddressCountry](docs/ReceiverAddressCountry.md)
+ - [ReceiverAddressMunicipality](docs/ReceiverAddressMunicipality.md)
+ - [ReceiverAddressNeighborhood](docs/ReceiverAddressNeighborhood.md)
+ - [ReceiverAddressState](docs/ReceiverAddressState.md)
+ - [Results](docs/Results.md)
+ - [ResultsFrom](docs/ResultsFrom.md)
+ - [ResultsText](docs/ResultsText.md)
+ - [ResultsTo](docs/ResultsTo.md)
+ - [Rules](docs/Rules.md)
+ - [SaleTerms](docs/SaleTerms.md)
+ - [Sales](docs/Sales.md)
+ - [SearchLocation](docs/SearchLocation.md)
+ - [SearchLocationCity](docs/SearchLocationCity.md)
+ - [SearchLocationState](docs/SearchLocationState.md)
+ - [Sell](docs/Sell.md)
+ - [SellImmediatePayment](docs/SellImmediatePayment.md)
+ - [SellerAddress](docs/SellerAddress.md)
+ - [SellerReputation](docs/SellerReputation.md)
+ - [SenderAddress](docs/SenderAddress.md)
+ - [Shipment](docs/Shipment.md)
+ - [Shipping](docs/Shipping.md)
+ - [ShippingItems](docs/ShippingItems.md)
+ - [ShippingOption](docs/ShippingOption.md)
+ - [ShoppingCart](docs/ShoppingCart.md)
+ - [Site](docs/Site.md)
+ - [SiteSettings](docs/SiteSettings.md)
+ - [Sites](docs/Sites.md)
+ - [SitesSite](docs/SitesSite.md)
+ - [State](docs/State.md)
+ - [Status](docs/Status.md)
+ - [StatusHistory](docs/StatusHistory.md)
+ - [Text](docs/Text.md)
+ - [TimeFrame](docs/TimeFrame.md)
+ - [To](docs/To.md)
+ - [Transactions](docs/Transactions.md)
+ - [Unrated](docs/Unrated.md)
+ - [UserResponse](docs/UserResponse.md)
+ - [Variations](docs/Variations.md)
+ - [Warnings](docs/Warnings.md)
 
-```java
-FluentStringsMap params = new FluentStringsMap();
-params.add("access_token", m.getAccessToken());
-Response response = m.get("/users/me", params);
-```
 
-## Making POST calls
+## Documentation for Authorization
 
-```java
-FluentStringsMap params = new FluentStringsMap();
-params.add("access_token", m.getAccessToken());
-Response r = m.post("/items", params, "{\"foo\":\"bar\"}");
-```
-## Making PUT calls
+Authentication schemes defined for the API:
+### oAuth2
 
-```java
-FluentStringsMap params = new FluentStringsMap();
-params.add("access_token", m.getAccessToken());
-Response r = m.put("/items", params, "{\"foo\":\"bar\"}");
-```
-## Making DELETE calls
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: https://auth.mercadolibre.com.ar/authorization [Check AuthURL values by Site](/src/main/java/io/swagger/client/Configuration.java)
+- **Token URL**: https://api.mercadolibre.com/oauth/token
+- **Scopes**: 
+  - read: Grants read access
+  - write: Grants write access
+  - offline_access: Grants read and write access, and adds the possibility to get a refresh token and stay authenticated as the user.
 
-```java
-FluentStringsMap params = new FluentStringsMap();
-params.add("access_token", m.getAccessToken());
-Response r = m.delete("/items/123", params);
-```
 
-## Are there more examples?
-Yes! All you have to do is get inside mockapi directory. and run:
+## Recommendation
 
-```node app.js```
+It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
-The example app will be listening on port 3000, and you can interact with all the examples we provide.
+## Author
+Florencia Solari (fsolari)
 
-## Do I always need to include the ```access_token``` as a parameter?
-No. Actually most ```GET``` requests don't need an ```access_token``` and it is easier to avoid them and also it is better in terms of caching.
-But this decision is left to you. You should decide when it is necessary to include it or not.
-
-## Is there a JVM based SDK for my dynamic language?
-
-Use this SDK for any jvm-based language. It should be easy and will adapt just right.
-
-## Community
-
-You can contact us if you have questions using the standard communication channels described in the [developer's site](http://developers.mercadolibre.com/discuss)
-
-## I want to contribute!
-
-That is great! Just fork the project in github. Create a topic branch, write some code, and add some tests for your new code.
-
-To run the tests run ```make test```.
-
-Thanks for helping!
+Most code was auto generated by [swagger code generator](https://github.com/swagger-api/swagger-codegen.git)
