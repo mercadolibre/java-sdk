@@ -13,21 +13,17 @@
 
 package io.swagger.client.model;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.Pictures;
-import io.swagger.client.model.Variations;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ItemJson
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-08-06T14:21:46.668-03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-09-14T10:44:34.055-03:00")
 public class ItemJson {
   @JsonProperty("listing_type_id")
   private String listingTypeId = null;
@@ -59,18 +55,27 @@ public class ItemJson {
   @JsonProperty("price")
   private Integer price = null;
 
+  @JsonProperty("official_store_id")
+  private Integer officialStoreId = null;
+
   @JsonProperty("variations")
   private List<Variations> variations = null;
+
+  @JsonProperty("attributes")
+  private List<Attributes> attributes = null;
+
+  @JsonProperty("shipping")
+  private List<Shipping> shipping = null;
 
   public ItemJson listingTypeId(String listingTypeId) {
     this.listingTypeId = listingTypeId;
     return this;
   }
 
-   /**
+  /**
    * Get listingTypeId
    * @return listingTypeId
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getListingTypeId() {
     return listingTypeId;
@@ -93,10 +98,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get pictures
    * @return pictures
-  **/
+   **/
   @ApiModelProperty(value = "")
   public List<Pictures> getPictures() {
     return pictures;
@@ -111,10 +116,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get title
    * @return title
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getTitle() {
     return title;
@@ -129,10 +134,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get availableQuantity
    * @return availableQuantity
-  **/
+   **/
   @ApiModelProperty(value = "")
   public Integer getAvailableQuantity() {
     return availableQuantity;
@@ -147,10 +152,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get categoryId
    * @return categoryId
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getCategoryId() {
     return categoryId;
@@ -165,10 +170,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get buyingMode
    * @return buyingMode
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getBuyingMode() {
     return buyingMode;
@@ -183,10 +188,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get currencyId
    * @return currencyId
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getCurrencyId() {
     return currencyId;
@@ -201,10 +206,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get condition
    * @return condition
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getCondition() {
     return condition;
@@ -219,10 +224,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get siteId
    * @return siteId
-  **/
+   **/
   @ApiModelProperty(value = "")
   public String getSiteId() {
     return siteId;
@@ -237,10 +242,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get price
    * @return price
-  **/
+   **/
   @ApiModelProperty(value = "")
   public Integer getPrice() {
     return price;
@@ -248,6 +253,24 @@ public class ItemJson {
 
   public void setPrice(Integer price) {
     this.price = price;
+  }
+
+  public ItemJson officialStoreId(Integer officialStoreId) {
+    this.officialStoreId = officialStoreId;
+    return this;
+  }
+
+  /**
+   * Get officialStoreId
+   * @return officialStoreId
+   **/
+  @ApiModelProperty(value = "")
+  public Integer getOfficialStoreId() {
+    return officialStoreId;
+  }
+
+  public void setOfficialStoreId(Integer officialStoreId) {
+    this.officialStoreId = officialStoreId;
   }
 
   public ItemJson variations(List<Variations> variations) {
@@ -263,10 +286,10 @@ public class ItemJson {
     return this;
   }
 
-   /**
+  /**
    * Get variations
    * @return variations
-  **/
+   **/
   @ApiModelProperty(value = "")
   public List<Variations> getVariations() {
     return variations;
@@ -274,6 +297,58 @@ public class ItemJson {
 
   public void setVariations(List<Variations> variations) {
     this.variations = variations;
+  }
+
+  public ItemJson attributes(List<Attributes> attributes) {
+    this.attributes = attributes;
+    return this;
+  }
+
+  public ItemJson addAttributesItem(Attributes attributesItem) {
+    if (this.attributes == null) {
+      this.attributes = new ArrayList<Attributes>();
+    }
+    this.attributes.add(attributesItem);
+    return this;
+  }
+
+  /**
+   * Get attributes
+   * @return attributes
+   **/
+  @ApiModelProperty(value = "")
+  public List<Attributes> getAttributes() {
+    return attributes;
+  }
+
+  public void setAttributes(List<Attributes> attributes) {
+    this.attributes = attributes;
+  }
+
+  public ItemJson shipping(List<Shipping> shipping) {
+    this.shipping = shipping;
+    return this;
+  }
+
+  public ItemJson addShippingItem(Shipping shippingItem) {
+    if (this.shipping == null) {
+      this.shipping = new ArrayList<Shipping>();
+    }
+    this.shipping.add(shippingItem);
+    return this;
+  }
+
+  /**
+   * Get shipping
+   * @return shipping
+   **/
+  @ApiModelProperty(value = "")
+  public List<Shipping> getShipping() {
+    return shipping;
+  }
+
+  public void setShipping(List<Shipping> shipping) {
+    this.shipping = shipping;
   }
 
 
@@ -287,21 +362,24 @@ public class ItemJson {
     }
     ItemJson itemJson = (ItemJson) o;
     return Objects.equals(this.listingTypeId, itemJson.listingTypeId) &&
-        Objects.equals(this.pictures, itemJson.pictures) &&
-        Objects.equals(this.title, itemJson.title) &&
-        Objects.equals(this.availableQuantity, itemJson.availableQuantity) &&
-        Objects.equals(this.categoryId, itemJson.categoryId) &&
-        Objects.equals(this.buyingMode, itemJson.buyingMode) &&
-        Objects.equals(this.currencyId, itemJson.currencyId) &&
-        Objects.equals(this.condition, itemJson.condition) &&
-        Objects.equals(this.siteId, itemJson.siteId) &&
-        Objects.equals(this.price, itemJson.price) &&
-        Objects.equals(this.variations, itemJson.variations);
+            Objects.equals(this.pictures, itemJson.pictures) &&
+            Objects.equals(this.title, itemJson.title) &&
+            Objects.equals(this.availableQuantity, itemJson.availableQuantity) &&
+            Objects.equals(this.categoryId, itemJson.categoryId) &&
+            Objects.equals(this.buyingMode, itemJson.buyingMode) &&
+            Objects.equals(this.currencyId, itemJson.currencyId) &&
+            Objects.equals(this.condition, itemJson.condition) &&
+            Objects.equals(this.siteId, itemJson.siteId) &&
+            Objects.equals(this.price, itemJson.price) &&
+            Objects.equals(this.officialStoreId, itemJson.officialStoreId) &&
+            Objects.equals(this.variations, itemJson.variations) &&
+            Objects.equals(this.attributes, itemJson.attributes) &&
+            Objects.equals(this.shipping, itemJson.shipping);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(listingTypeId, pictures, title, availableQuantity, categoryId, buyingMode, currencyId, condition, siteId, price, variations);
+    return Objects.hash(listingTypeId, pictures, title, availableQuantity, categoryId, buyingMode, currencyId, condition, siteId, price, officialStoreId, variations, attributes, shipping);
   }
 
 
@@ -309,7 +387,7 @@ public class ItemJson {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ItemJson {\n");
-    
+
     sb.append("    listingTypeId: ").append(toIndentedString(listingTypeId)).append("\n");
     sb.append("    pictures: ").append(toIndentedString(pictures)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
@@ -320,7 +398,10 @@ public class ItemJson {
     sb.append("    condition: ").append(toIndentedString(condition)).append("\n");
     sb.append("    siteId: ").append(toIndentedString(siteId)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    officialStoreId: ").append(toIndentedString(officialStoreId)).append("\n");
     sb.append("    variations: ").append(toIndentedString(variations)).append("\n");
+    sb.append("    attributes: ").append(toIndentedString(attributes)).append("\n");
+    sb.append("    shipping: ").append(toIndentedString(shipping)).append("\n");
     sb.append("}");
     return sb.toString();
   }
