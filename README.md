@@ -109,7 +109,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | **defaultDelete** | **DELETE** /{resource}/{id} | Deletes an object.
 *DefaultApi* | [**categoriesCategoryIdAttributesGet**](docs/DefaultApi.md#categoriesCategoryIdAttributesGet) | **GET** /categories/{category_id}/attributes | Returns all attributes from a category.
 *DefaultApi* | [**categoriesCategoryIdGet**](docs/DefaultApi.md#categoriesCategoryIdGet) | **GET** /categories/{category_id} | Returns information about a category.
-*DefaultApi* | [**itemsItemIdGet**](docs/DefaultApi.md#itemsItemIdGet) | **GET** /items/{item_id} | Return item infromation.
+*DefaultApi* | [**itemsItemIdGet**](docs/DefaultApi.md#itemsItemIdGet) | **GET** /items/{item_id} | Return item information.
 *DefaultApi* | [**itemsItemIdPut**](docs/DefaultApi.md#itemsItemIdPut) | **PUT** /items/{item_id} | Update an item.
 *DefaultApi* | [**itemsPost**](docs/DefaultApi.md#itemsPost) | **POST** /items | List an item.
 *DefaultApi* | [**itemsValidatePost**](docs/DefaultApi.md#itemsValidatePost) | **POST** /items/validate | Validate the JSON before listing an item.
