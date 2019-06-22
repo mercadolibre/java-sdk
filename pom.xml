@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mercadolibre</groupId>
-    <artifactId>mercadolibre-java-client</artifactId>
+    <artifactId>java-client</artifactId>
     <packaging>jar</packaging>
-    <name>mercadolibre-java-client</name>
+    <name>java-client</name>
     <version>1.0.0</version>
     <url>https://github.com/swagger-api/swagger-codegen</url>
     <description>MercadoLibre Java Client</description>
