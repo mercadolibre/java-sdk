@@ -35,9 +35,9 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import io.swagger.client.ApiException;
-import io.swagger.client.api.DefaultApi;
-import io.swagger.client.model.*;
+import com.mercadolibre.client.ApiException;
+import com.mercadolibre.client.api.DefaultApi;
+import com.mercadolibre.client.model.*;
 
 
 public class DefaultApiExample {
@@ -241,7 +241,7 @@ Authentication schemes defined for the API:
 
 - **Type**: OAuth
 - **Flow**: accessCode
-- **Authorization URL**: https://auth.mercadolibre.com.ar/authorization [Check AuthURL values by Site](/src/main/java/io/swagger/client/Configuration.java)
+- **Authorization URL**: https://auth.mercadolibre.com.ar/authorization [Check AuthURL values by Site](/io/mercadolibre/client/Configuration.java)
 - **Token URL**: https://api.mercadolibre.com/oauth/token
 - **Scopes**: 
   - read: Grants read access
