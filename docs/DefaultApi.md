@@ -32,8 +32,8 @@ Returns all attributes from a category.
 ### Example
 ```java
 // Import classes:
-ApiException
-DefaultApi
+//import com.mercadolibre.client.ApiException;	ApiException
+//import com.mercadolibre.client.api.DefaultApi;
 
 DefaultApi apiInstance = new DefaultApi();
 String categoryId = "categoryId_example"; // String | The category ID.

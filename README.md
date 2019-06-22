@@ -241,7 +241,7 @@ Authentication schemes defined for the API:
 
 - **Type**: OAuth
 - **Flow**: accessCode
-- **Authorization URL**: https://auth.mercadolibre.com.ar/authorization [Check AuthURL values by Site](/io/mercadolibre/client/Configuration.java)
+- **Authorization URL**: https://auth.mercadolibre.com.ar/authorization [Check AuthURL values by Site](/src/main/java/com/mercadolibre/client/Configuration.java)
 - **Token URL**: https://api.mercadolibre.com/oauth/token
 - **Scopes**: 
   - read: Grants read access
