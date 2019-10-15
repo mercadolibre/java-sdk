@@ -53,7 +53,7 @@ public class ApiClient {
         this.dateFormat = new RFC3339DateFormat();
 
         // Set default User-Agent.
-        setUserAgent("MELI-JAVA-SDK-0.0.5");
+        setUserAgent("MELI-JAVA-SDK-0.0.6");
     }
 
     /**

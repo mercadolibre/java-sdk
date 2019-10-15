@@ -32,7 +32,7 @@ public class To {
   private String resource = null;
 
   @JsonProperty("resource_id")
-  private Integer resourceId = null;
+  private Long resourceId = null;
 
   @JsonProperty("site_id")
   private String siteId = null;
