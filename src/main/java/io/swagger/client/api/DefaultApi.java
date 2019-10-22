@@ -1,18 +1,32 @@
 package io.swagger.client.api;
 
-import io.swagger.client.ApiClient;
-import io.swagger.client.ApiException;
-import io.swagger.client.Configuration;
-import io.swagger.client.Pair;
-import io.swagger.client.model.*;
-
-import javax.ws.rs.core.GenericType;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.ws.rs.core.GenericType;
+
+import io.swagger.client.ApiClient;
+import io.swagger.client.ApiException;
+import io.swagger.client.Configuration;
+import io.swagger.client.Pair;
+import io.swagger.client.model.AccessToken;
+import io.swagger.client.model.CategoryPrediction;
+import io.swagger.client.model.CategoryResponse;
+import io.swagger.client.model.ItemJson;
+import io.swagger.client.model.ItemResponse;
+import io.swagger.client.model.Message;
+import io.swagger.client.model.MessageCreated;
+import io.swagger.client.model.MessageJSON;
+import io.swagger.client.model.MessageSearchResults;
+import io.swagger.client.model.RefreshToken;
+import io.swagger.client.model.Shipment;
+import io.swagger.client.model.Site;
+import io.swagger.client.model.Sites;
+import io.swagger.client.model.UserResponse;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2018-08-06T14:21:46.668-03:00")
 public class DefaultApi {
@@ -75,7 +89,7 @@ public class DefaultApi {
 
 
     /**
-     * @param callback: The callback URL. Must be the applications redirect URI
+     * @param redirectUri: The callback URL. Must be the applications redirect URI
      * @param authUrl:  The authorization URL. Get from Meli.AuthUrls
      * @return the authorization URL
      */
