@@ -32,7 +32,7 @@ public class To {
   private String resource = null;
 
   @JsonProperty("resource_id")
-  private Integer resourceId = null;
+  private Long resourceId = null;
 
   @JsonProperty("site_id")
   private String siteId = null;
@@ -73,7 +73,7 @@ public class To {
     this.resource = resource;
   }
 
-  public To resourceId(Integer resourceId) {
+  public To resourceId(Long resourceId) {
     this.resourceId = resourceId;
     return this;
   }
@@ -83,11 +83,11 @@ public class To {
    * @return resourceId
   **/
   @ApiModelProperty(value = "")
-  public Integer getResourceId() {
+  public Long getResourceId() {
     return resourceId;
   }
 
-  public void setResourceId(Integer resourceId) {
+  public void setResourceId(Long resourceId) {
     this.resourceId = resourceId;
   }
 
