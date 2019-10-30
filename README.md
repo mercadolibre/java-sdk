@@ -113,9 +113,6 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**itemsItemIdPut**](docs/DefaultApi.md#itemsItemIdPut) | **PUT** /items/{item_id} | Update an item.
 *DefaultApi* | [**itemsPost**](docs/DefaultApi.md#itemsPost) | **POST** /items | List an item.
 *DefaultApi* | [**itemsValidatePost**](docs/DefaultApi.md#itemsValidatePost) | **POST** /items/validate | Validate the JSON before listing an item.
-*DefaultApi* | [**messagesMessageIdGet**](docs/DefaultApi.md#messagesMessageIdGet) | **GET** /messages/{message_id} | Get a message by ID.
-*DefaultApi* | [**messagesOrdersOrderIdGet**](docs/DefaultApi.md#messagesOrdersOrderIdGet) | **GET** /messages/orders/{order_id} | Return all messages from a order.
-*DefaultApi* | [**messagesPost**](docs/DefaultApi.md#messagesPost) | **POST** /messages | Send a message.
 *DefaultApi* | [**ordersOrderIdGet**](docs/DefaultApi.md#ordersOrderIdGet) | **GET** /orders/{order_id} | Get an order by ID.
 *DefaultApi* | [**ordersSearchGet**](docs/DefaultApi.md#ordersSearchGet) | **GET** /orders/search | Search orders by seller or buyer.
 *DefaultApi* | [**shipmentsShipmentIdGet**](docs/DefaultApi.md#shipmentsShipmentIdGet) | **GET** /shipments/{shipment_id} | Retrieves all data to make a delivery.

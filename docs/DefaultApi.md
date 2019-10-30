@@ -10,9 +10,6 @@ Method | HTTP request | Description
 [**itemsItemIdPut**](DefaultApi.md#itemsItemIdPut) | **PUT** /items/{item_id} | Update an item.
 [**itemsPost**](DefaultApi.md#itemsPost) | **POST** /items | List an item.
 [**itemsValidatePost**](DefaultApi.md#itemsValidatePost) | **POST** /items/validate | Validate the JSON before listing an item.
-[**messagesMessageIdGet**](DefaultApi.md#messagesMessageIdGet) | **GET** /messages/{message_id} | Get a message by ID.
-[**messagesOrdersOrderIdGet**](DefaultApi.md#messagesOrdersOrderIdGet) | **GET** /messages/orders/{order_id} | Return all messages from a order.
-[**messagesPost**](DefaultApi.md#messagesPost) | **POST** /messages | Send a message.
 [**ordersOrderIdGet**](DefaultApi.md#ordersOrderIdGet) | **GET** /orders/{order_id} | Get an order by ID.
 [**ordersSearchGet**](DefaultApi.md#ordersSearchGet) | **GET** /orders/search | Search orders by seller or buyer.
 [**shipmentsShipmentIdGet**](DefaultApi.md#shipmentsShipmentIdGet) | **GET** /shipments/{shipment_id} | Retrieves all data to make a delivery.
@@ -296,10 +293,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="messagesMessageIdGet"></a>
-# **messagesMessageIdGet**
-> Message messagesMessageIdGet(accessToken, messageId)
-
 Get a message by ID.
 
 ### Example
@@ -308,24 +301,6 @@ Get a message by ID.
 //import io.swagger.client.ApiClient;
 
 //import io.swagger.client.api.DefaultApi;
-
-
-
-
-
-
-
-DefaultApi apiInstance = new DefaultApi();
-String accessToken = "\"APP_USR-1232321321-072613-cabb235ea80bb70b9312c2aade38ec3d-3213211\""; // String | 
-String messageId = "messageId_example"; // String | The message ID.
-try {
-    Message result = apiInstance.messagesMessageIdGet(accessToken, messageId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#messagesMessageIdGet");
-    e.printStackTrace();
-}
-```
 
 ### Parameters
 
@@ -347,10 +322,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="messagesOrdersOrderIdGet"></a>
-# **messagesOrdersOrderIdGet**
-> MessageSearchResults messagesOrdersOrderIdGet(accessToken, orderId)
-
 Return all messages from a order.
 
 ### Example
@@ -361,22 +332,6 @@ Return all messages from a order.
 //import io.swagger.client.api.DefaultApi;
 
 
-
-
-
-
-
-DefaultApi apiInstance = new DefaultApi();
-String accessToken = "\"APP_USR-123213213-072613-cabb235ea80bb70b9312c2aade38ec3d-32132221\""; // String | 
-Integer orderId = 56; // Integer | The order ID.
-try {
-    MessageSearchResults result = apiInstance.messagesOrdersOrderIdGet(accessToken, orderId);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#messagesOrdersOrderIdGet");
-    e.printStackTrace();
-}
-```
 
 ### Parameters
 
@@ -398,10 +353,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="messagesPost"></a>
-# **messagesPost**
-> MessageCreated messagesPost(accessToken, body)
-
 Send a message.
 
 ### Example
@@ -411,23 +362,6 @@ Send a message.
 
 //import io.swagger.client.api.DefaultApi;
 
-
-
-
-
-
-
-DefaultApi apiInstance = new DefaultApi();
-String accessToken = "\"APP_USR-12323311-072613-cabb235ea80bb70b9312c2aade38ec3d-33321123\""; // String | 
-MessageJSON body = new MessageJSON(); // MessageJSON | 
-try {
-    MessageCreated result = apiInstance.messagesPost(accessToken, body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling DefaultApi#messagesPost");
-    e.printStackTrace();
-}
-```
 
 ### Parameters
 
