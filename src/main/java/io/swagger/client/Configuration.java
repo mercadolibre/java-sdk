@@ -51,7 +51,8 @@ public class Configuration {
         MPA("https://auth.mercadolibre.com.pa"), // Panama
         MPE("https://auth.mercadolibre.com.pe"), // Peru
         MPT("https://auth.mercadolibre.com.pt"), // Portugal
-        MRD("https://auth.mercadolibre.com.do"); // Dominicana
+        MRD("https://auth.mercadolibre.com.do"), // Dominicana
+        CBT("https://global-selling.mercadolibre.com"); // CBT
 
         private String value;
 
