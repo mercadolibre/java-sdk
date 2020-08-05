@@ -32,6 +32,23 @@ public class RestClientApiTest {
 
     
     /**
+     * Resource path DELETE
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void resourceDeleteTest() throws ApiException {
+        String resource = null;
+        String accessToken = null;
+        api.resourceDelete(resource, accessToken);
+
+        // TODO: test validations
+    }
+    
+    /**
      * Resource path GET
      *
      * 
