@@ -43,7 +43,7 @@ public class RestClientApiTest {
     public void resourceDeleteTest() throws ApiException {
         String resource = null;
         String accessToken = null;
-        api.resourceDelete(resource, accessToken);
+        Object response = api.resourceDelete(resource, accessToken);
 
         // TODO: test validations
     }
@@ -60,7 +60,7 @@ public class RestClientApiTest {
     public void resourceGetTest() throws ApiException {
         String resource = null;
         String accessToken = null;
-        api.resourceGet(resource, accessToken);
+        Object response = api.resourceGet(resource, accessToken);
 
         // TODO: test validations
     }
@@ -78,7 +78,7 @@ public class RestClientApiTest {
         String resource = null;
         String accessToken = null;
         Object body = null;
-        api.resourcePost(resource, accessToken, body);
+        Object response = api.resourcePost(resource, accessToken, body);
 
         // TODO: test validations
     }
@@ -96,7 +96,7 @@ public class RestClientApiTest {
         String resource = null;
         String accessToken = null;
         Object body = null;
-        api.resourcePut(resource, accessToken, body);
+        Object response = api.resourcePut(resource, accessToken, body);
 
         // TODO: test validations
     }

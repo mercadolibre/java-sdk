@@ -43,7 +43,7 @@ public class ItemsHealthApiTest {
     public void itemsIdHealthActionsGetTest() throws ApiException {
         String id = null;
         String accessToken = null;
-        api.itemsIdHealthActionsGet(id, accessToken);
+        Object response = api.itemsIdHealthActionsGet(id, accessToken);
 
         // TODO: test validations
     }
@@ -60,7 +60,7 @@ public class ItemsHealthApiTest {
     public void itemsIdHealthGetTest() throws ApiException {
         String id = null;
         String accessToken = null;
-        api.itemsIdHealthGet(id, accessToken);
+        Object response = api.itemsIdHealthGet(id, accessToken);
 
         // TODO: test validations
     }
@@ -76,7 +76,7 @@ public class ItemsHealthApiTest {
     @Test
     public void sitesSiteIdHealthLevelsGetTest() throws ApiException {
         String siteId = null;
-        api.sitesSiteIdHealthLevelsGet(siteId);
+        Object response = api.sitesSiteIdHealthLevelsGet(siteId);
 
         // TODO: test validations
     }

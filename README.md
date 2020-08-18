@@ -110,7 +110,8 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 ##### The URIs are relative to https://api.mercadolibre.com
 
-##### The Authorization URL: https://auth.mercadolibre.com.ar/authorization
+##### The Authorization URLs (set the correct country domain): https://auth.mercadolibre.{country_domain}
+
 
 #####  All docs for the library are located [here](https://github.com/mercadolibre/java-sdk/tree/master/docs)
 

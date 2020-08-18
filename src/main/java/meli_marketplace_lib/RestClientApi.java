@@ -63,7 +63,7 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call resourceDeleteCall(String resource, String accessToken, final ApiCallback _callback) throws ApiException {
@@ -83,7 +83,7 @@ public class RestClientApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -124,15 +124,17 @@ public class RestClientApi {
      * 
      * @param resource  (required)
      * @param accessToken  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void resourceDelete(String resource, String accessToken) throws ApiException {
-        resourceDeleteWithHttpInfo(resource, accessToken);
+    public Object resourceDelete(String resource, String accessToken) throws ApiException {
+        ApiResponse<Object> localVarResp = resourceDeleteWithHttpInfo(resource, accessToken);
+        return localVarResp.getData();
     }
 
     /**
@@ -140,17 +142,18 @@ public class RestClientApi {
      * 
      * @param resource  (required)
      * @param accessToken  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> resourceDeleteWithHttpInfo(String resource, String accessToken) throws ApiException {
+    public ApiResponse<Object> resourceDeleteWithHttpInfo(String resource, String accessToken) throws ApiException {
         okhttp3.Call localVarCall = resourceDeleteValidateBeforeCall(resource, accessToken, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -164,13 +167,14 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call resourceDeleteAsync(String resource, String accessToken, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call resourceDeleteAsync(String resource, String accessToken, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = resourceDeleteValidateBeforeCall(resource, accessToken, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -183,7 +187,7 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call resourceGetCall(String resource, String accessToken, final ApiCallback _callback) throws ApiException {
@@ -203,7 +207,7 @@ public class RestClientApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -244,15 +248,17 @@ public class RestClientApi {
      * 
      * @param resource  (required)
      * @param accessToken  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void resourceGet(String resource, String accessToken) throws ApiException {
-        resourceGetWithHttpInfo(resource, accessToken);
+    public Object resourceGet(String resource, String accessToken) throws ApiException {
+        ApiResponse<Object> localVarResp = resourceGetWithHttpInfo(resource, accessToken);
+        return localVarResp.getData();
     }
 
     /**
@@ -260,17 +266,18 @@ public class RestClientApi {
      * 
      * @param resource  (required)
      * @param accessToken  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> resourceGetWithHttpInfo(String resource, String accessToken) throws ApiException {
+    public ApiResponse<Object> resourceGetWithHttpInfo(String resource, String accessToken) throws ApiException {
         okhttp3.Call localVarCall = resourceGetValidateBeforeCall(resource, accessToken, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -284,13 +291,14 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call resourceGetAsync(String resource, String accessToken, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call resourceGetAsync(String resource, String accessToken, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = resourceGetValidateBeforeCall(resource, accessToken, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -304,7 +312,7 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call resourcePostCall(String resource, String accessToken, Object body, final ApiCallback _callback) throws ApiException {
@@ -324,7 +332,7 @@ public class RestClientApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -371,15 +379,17 @@ public class RestClientApi {
      * @param resource  (required)
      * @param accessToken  (required)
      * @param body  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void resourcePost(String resource, String accessToken, Object body) throws ApiException {
-        resourcePostWithHttpInfo(resource, accessToken, body);
+    public Object resourcePost(String resource, String accessToken, Object body) throws ApiException {
+        ApiResponse<Object> localVarResp = resourcePostWithHttpInfo(resource, accessToken, body);
+        return localVarResp.getData();
     }
 
     /**
@@ -388,17 +398,18 @@ public class RestClientApi {
      * @param resource  (required)
      * @param accessToken  (required)
      * @param body  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> resourcePostWithHttpInfo(String resource, String accessToken, Object body) throws ApiException {
+    public ApiResponse<Object> resourcePostWithHttpInfo(String resource, String accessToken, Object body) throws ApiException {
         okhttp3.Call localVarCall = resourcePostValidateBeforeCall(resource, accessToken, body, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -413,13 +424,14 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call resourcePostAsync(String resource, String accessToken, Object body, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call resourcePostAsync(String resource, String accessToken, Object body, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = resourcePostValidateBeforeCall(resource, accessToken, body, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -433,7 +445,7 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call resourcePutCall(String resource, String accessToken, Object body, final ApiCallback _callback) throws ApiException {
@@ -453,7 +465,7 @@ public class RestClientApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -500,15 +512,17 @@ public class RestClientApi {
      * @param resource  (required)
      * @param accessToken  (required)
      * @param body  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void resourcePut(String resource, String accessToken, Object body) throws ApiException {
-        resourcePutWithHttpInfo(resource, accessToken, body);
+    public Object resourcePut(String resource, String accessToken, Object body) throws ApiException {
+        ApiResponse<Object> localVarResp = resourcePutWithHttpInfo(resource, accessToken, body);
+        return localVarResp.getData();
     }
 
     /**
@@ -517,17 +531,18 @@ public class RestClientApi {
      * @param resource  (required)
      * @param accessToken  (required)
      * @param body  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> resourcePutWithHttpInfo(String resource, String accessToken, Object body) throws ApiException {
+    public ApiResponse<Object> resourcePutWithHttpInfo(String resource, String accessToken, Object body) throws ApiException {
         okhttp3.Call localVarCall = resourcePutValidateBeforeCall(resource, accessToken, body, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -542,13 +557,14 @@ public class RestClientApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call resourcePutAsync(String resource, String accessToken, Object body, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call resourcePutAsync(String resource, String accessToken, Object body, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = resourcePutValidateBeforeCall(resource, accessToken, body, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

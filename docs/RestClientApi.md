@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 <a name="resourceDelete"></a>
 # **resourceDelete**
-> resourceDelete(resource, accessToken)
+> Object resourceDelete(resource, accessToken)
 
 Resource path DELETE
 
@@ -34,7 +34,8 @@ public class Example {
     String resource = "resource_example"; // String | 
     String accessToken = "accessToken_example"; // String | 
     try {
-      apiInstance.resourceDelete(resource, accessToken);
+      Object result = apiInstance.resourceDelete(resource, accessToken);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RestClientApi#resourceDelete");
       System.err.println("Status code: " + e.getCode());
@@ -55,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -64,16 +65,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="resourceGet"></a>
 # **resourceGet**
-> resourceGet(resource, accessToken)
+> Object resourceGet(resource, accessToken)
 
 Resource path GET
 
@@ -95,7 +96,8 @@ public class Example {
     String resource = "resource_example"; // String | 
     String accessToken = "accessToken_example"; // String | 
     try {
-      apiInstance.resourceGet(resource, accessToken);
+      Object result = apiInstance.resourceGet(resource, accessToken);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RestClientApi#resourceGet");
       System.err.println("Status code: " + e.getCode());
@@ -116,7 +118,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -125,16 +127,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="resourcePost"></a>
 # **resourcePost**
-> resourcePost(resource, accessToken, body)
+> Object resourcePost(resource, accessToken, body)
 
 Resourse path POST
 
@@ -157,7 +159,8 @@ public class Example {
     String accessToken = "accessToken_example"; // String | 
     Object body = null; // Object | 
     try {
-      apiInstance.resourcePost(resource, accessToken, body);
+      Object result = apiInstance.resourcePost(resource, accessToken, body);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RestClientApi#resourcePost");
       System.err.println("Status code: " + e.getCode());
@@ -179,7 +182,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -188,16 +191,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="resourcePut"></a>
 # **resourcePut**
-> resourcePut(resource, accessToken, body)
+> Object resourcePut(resource, accessToken, body)
 
 Resourse path PUT
 
@@ -220,7 +223,8 @@ public class Example {
     String accessToken = "accessToken_example"; // String | 
     Object body = null; // Object | 
     try {
-      apiInstance.resourcePut(resource, accessToken, body);
+      Object result = apiInstance.resourcePut(resource, accessToken, body);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling RestClientApi#resourcePut");
       System.err.println("Status code: " + e.getCode());
@@ -242,7 +246,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -251,10 +255,10 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 

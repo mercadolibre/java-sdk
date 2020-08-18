@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="itemsIdGet"></a>
 # **itemsIdGet**
-> itemsIdGet(id)
+> Object itemsIdGet(id)
 
 Return a Item.
 
@@ -32,7 +32,8 @@ public class Example {
     ItemsApi apiInstance = new ItemsApi(defaultClient);
     String id = "id_example"; // String | 
     try {
-      apiInstance.itemsIdGet(id);
+      Object result = apiInstance.itemsIdGet(id);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ItemsApi#itemsIdGet");
       System.err.println("Status code: " + e.getCode());
@@ -52,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -61,16 +62,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="itemsIdPut"></a>
 # **itemsIdPut**
-> itemsIdPut(id, accessToken, item)
+> Object itemsIdPut(id, accessToken, item)
 
 Update a Item.
 
@@ -93,7 +94,8 @@ public class Example {
     String accessToken = "accessToken_example"; // String | 
     Item item = new Item(); // Item | 
     try {
-      apiInstance.itemsIdPut(id, accessToken, item);
+      Object result = apiInstance.itemsIdPut(id, accessToken, item);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ItemsApi#itemsIdPut");
       System.err.println("Status code: " + e.getCode());
@@ -115,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -124,16 +126,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="itemsPost"></a>
 # **itemsPost**
-> itemsPost(accessToken, item)
+> Object itemsPost(accessToken, item)
 
 Create a Item.
 
@@ -155,7 +157,8 @@ public class Example {
     String accessToken = "accessToken_example"; // String | 
     Item item = new Item(); // Item | 
     try {
-      apiInstance.itemsPost(accessToken, item);
+      Object result = apiInstance.itemsPost(accessToken, item);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ItemsApi#itemsPost");
       System.err.println("Status code: " + e.getCode());
@@ -176,7 +179,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -185,10 +188,10 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Ok |  -  |
+**200** | Successful operation |  -  |
 

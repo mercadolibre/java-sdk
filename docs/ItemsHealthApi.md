@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="itemsIdHealthActionsGet"></a>
 # **itemsIdHealthActionsGet**
-> itemsIdHealthActionsGet(id, accessToken)
+> Object itemsIdHealthActionsGet(id, accessToken)
 
 Return item health actions by id.
 
@@ -33,7 +33,8 @@ public class Example {
     String id = "id_example"; // String | 
     String accessToken = "accessToken_example"; // String | 
     try {
-      apiInstance.itemsIdHealthActionsGet(id, accessToken);
+      Object result = apiInstance.itemsIdHealthActionsGet(id, accessToken);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ItemsHealthApi#itemsIdHealthActionsGet");
       System.err.println("Status code: " + e.getCode());
@@ -54,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -63,16 +64,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="itemsIdHealthGet"></a>
 # **itemsIdHealthGet**
-> itemsIdHealthGet(id, accessToken)
+> Object itemsIdHealthGet(id, accessToken)
 
 Return health by id.
 
@@ -94,7 +95,8 @@ public class Example {
     String id = "id_example"; // String | 
     String accessToken = "accessToken_example"; // String | 
     try {
-      apiInstance.itemsIdHealthGet(id, accessToken);
+      Object result = apiInstance.itemsIdHealthGet(id, accessToken);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ItemsHealthApi#itemsIdHealthGet");
       System.err.println("Status code: " + e.getCode());
@@ -115,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -124,16 +126,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="sitesSiteIdHealthLevelsGet"></a>
 # **sitesSiteIdHealthLevelsGet**
-> sitesSiteIdHealthLevelsGet(siteId)
+> Object sitesSiteIdHealthLevelsGet(siteId)
 
 Return health levels.
 
@@ -154,7 +156,8 @@ public class Example {
     ItemsHealthApi apiInstance = new ItemsHealthApi(defaultClient);
     String siteId = "siteId_example"; // String | 
     try {
-      apiInstance.sitesSiteIdHealthLevelsGet(siteId);
+      Object result = apiInstance.sitesSiteIdHealthLevelsGet(siteId);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling ItemsHealthApi#sitesSiteIdHealthLevelsGet");
       System.err.println("Status code: " + e.getCode());
@@ -174,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -183,10 +186,10 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
