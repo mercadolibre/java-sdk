@@ -62,7 +62,7 @@ public class CategoriesApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call categoriesCategoryIdGetCall(String categoryId, final ApiCallback _callback) throws ApiException {
@@ -78,7 +78,7 @@ public class CategoriesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -113,32 +113,35 @@ public class CategoriesApi {
      * Return by category.
      * 
      * @param categoryId  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void categoriesCategoryIdGet(String categoryId) throws ApiException {
-        categoriesCategoryIdGetWithHttpInfo(categoryId);
+    public Object categoriesCategoryIdGet(String categoryId) throws ApiException {
+        ApiResponse<Object> localVarResp = categoriesCategoryIdGetWithHttpInfo(categoryId);
+        return localVarResp.getData();
     }
 
     /**
      * Return by category.
      * 
      * @param categoryId  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> categoriesCategoryIdGetWithHttpInfo(String categoryId) throws ApiException {
+    public ApiResponse<Object> categoriesCategoryIdGetWithHttpInfo(String categoryId) throws ApiException {
         okhttp3.Call localVarCall = categoriesCategoryIdGetValidateBeforeCall(categoryId, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -151,13 +154,14 @@ public class CategoriesApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call categoriesCategoryIdGetAsync(String categoryId, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call categoriesCategoryIdGetAsync(String categoryId, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = categoriesCategoryIdGetValidateBeforeCall(categoryId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -169,7 +173,7 @@ public class CategoriesApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call sitesSiteIdCategoriesGetCall(String siteId, final ApiCallback _callback) throws ApiException {
@@ -185,7 +189,7 @@ public class CategoriesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -220,32 +224,35 @@ public class CategoriesApi {
      * Return a categories by site.
      * 
      * @param siteId  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void sitesSiteIdCategoriesGet(String siteId) throws ApiException {
-        sitesSiteIdCategoriesGetWithHttpInfo(siteId);
+    public Object sitesSiteIdCategoriesGet(String siteId) throws ApiException {
+        ApiResponse<Object> localVarResp = sitesSiteIdCategoriesGetWithHttpInfo(siteId);
+        return localVarResp.getData();
     }
 
     /**
      * Return a categories by site.
      * 
      * @param siteId  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> sitesSiteIdCategoriesGetWithHttpInfo(String siteId) throws ApiException {
+    public ApiResponse<Object> sitesSiteIdCategoriesGetWithHttpInfo(String siteId) throws ApiException {
         okhttp3.Call localVarCall = sitesSiteIdCategoriesGetValidateBeforeCall(siteId, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -258,13 +265,14 @@ public class CategoriesApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sitesSiteIdCategoriesGetAsync(String siteId, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call sitesSiteIdCategoriesGetAsync(String siteId, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = sitesSiteIdCategoriesGetValidateBeforeCall(siteId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -278,7 +286,7 @@ public class CategoriesApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call sitesSiteIdDomainDiscoverySearchGetCall(String siteId, String q, String limit, final ApiCallback _callback) throws ApiException {
@@ -302,7 +310,7 @@ public class CategoriesApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -349,15 +357,17 @@ public class CategoriesApi {
      * @param siteId  (required)
      * @param q  (required)
      * @param limit  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void sitesSiteIdDomainDiscoverySearchGet(String siteId, String q, String limit) throws ApiException {
-        sitesSiteIdDomainDiscoverySearchGetWithHttpInfo(siteId, q, limit);
+    public Object sitesSiteIdDomainDiscoverySearchGet(String siteId, String q, String limit) throws ApiException {
+        ApiResponse<Object> localVarResp = sitesSiteIdDomainDiscoverySearchGetWithHttpInfo(siteId, q, limit);
+        return localVarResp.getData();
     }
 
     /**
@@ -366,17 +376,18 @@ public class CategoriesApi {
      * @param siteId  (required)
      * @param q  (required)
      * @param limit  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> sitesSiteIdDomainDiscoverySearchGetWithHttpInfo(String siteId, String q, String limit) throws ApiException {
+    public ApiResponse<Object> sitesSiteIdDomainDiscoverySearchGetWithHttpInfo(String siteId, String q, String limit) throws ApiException {
         okhttp3.Call localVarCall = sitesSiteIdDomainDiscoverySearchGetValidateBeforeCall(siteId, q, limit, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -391,13 +402,14 @@ public class CategoriesApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sitesSiteIdDomainDiscoverySearchGetAsync(String siteId, String q, String limit, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call sitesSiteIdDomainDiscoverySearchGetAsync(String siteId, String q, String limit, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = sitesSiteIdDomainDiscoverySearchGetValidateBeforeCall(siteId, q, limit, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

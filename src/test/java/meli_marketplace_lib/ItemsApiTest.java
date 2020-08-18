@@ -43,7 +43,7 @@ public class ItemsApiTest {
     @Test
     public void itemsIdGetTest() throws ApiException {
         String id = null;
-        api.itemsIdGet(id);
+        Object response = api.itemsIdGet(id);
 
         // TODO: test validations
     }
@@ -61,7 +61,7 @@ public class ItemsApiTest {
         String id = null;
         String accessToken = null;
         Item item = null;
-        api.itemsIdPut(id, accessToken, item);
+        Object response = api.itemsIdPut(id, accessToken, item);
 
         // TODO: test validations
     }
@@ -78,7 +78,7 @@ public class ItemsApiTest {
     public void itemsPostTest() throws ApiException {
         String accessToken = null;
         Item item = null;
-        api.itemsPost(accessToken, item);
+        Object response = api.itemsPost(accessToken, item);
 
         // TODO: test validations
     }

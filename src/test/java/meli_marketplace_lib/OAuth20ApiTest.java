@@ -65,7 +65,7 @@ public class OAuth20ApiTest {
         String redirectUri = null;
         String code = null;
         String refreshToken = null;
-        api.getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
+        Object response = api.getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
 
         // TODO: test validations
     }

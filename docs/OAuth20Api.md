@@ -64,16 +64,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**302** | Redirect to OAuth provider |  -  |
+**302** | Successful operation |  -  |
 
 <a name="getToken"></a>
 # **getToken**
-> getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken)
+> Object getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken)
 
 Request Access Token
 
@@ -101,7 +101,8 @@ public class Example {
     String code = "code_example"; // String | 
     String refreshToken = "refreshToken_example"; // String | 
     try {
-      apiInstance.getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
+      Object result = apiInstance.getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling OAuth20Api#getToken");
       System.err.println("Status code: " + e.getCode());
@@ -126,7 +127,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -135,10 +136,10 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Successful operation |  -  |
+**200** | A User object |  -  |
 

@@ -64,7 +64,7 @@ public class OAuth20Api {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 302 </td><td> Redirect to OAuth provider </td><td>  -  </td></tr>
+        <tr><td> 302 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call authCall(String responseType, String clientId, String redirectUri, final ApiCallback _callback) throws ApiException {
@@ -91,7 +91,7 @@ public class OAuth20Api {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -142,7 +142,7 @@ public class OAuth20Api {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 302 </td><td> Redirect to OAuth provider </td><td>  -  </td></tr>
+        <tr><td> 302 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public void auth(String responseType, String clientId, String redirectUri) throws ApiException {
@@ -160,7 +160,7 @@ public class OAuth20Api {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 302 </td><td> Redirect to OAuth provider </td><td>  -  </td></tr>
+        <tr><td> 302 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<Void> authWithHttpInfo(String responseType, String clientId, String redirectUri) throws ApiException {
@@ -180,7 +180,7 @@ public class OAuth20Api {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 302 </td><td> Redirect to OAuth provider </td><td>  -  </td></tr>
+        <tr><td> 302 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call authAsync(String responseType, String clientId, String redirectUri, final ApiCallback<Void> _callback) throws ApiException {
@@ -203,7 +203,7 @@ public class OAuth20Api {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A User object </td><td>  -  </td></tr>
      </table>
      * Learn more about user operations provided by this API.
      * @see <a href="http://api.example.com/docs/user-operations/">Request Access Token Documentation</a>
@@ -244,7 +244,7 @@ public class OAuth20Api {
         }
 
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -279,17 +279,19 @@ public class OAuth20Api {
      * @param redirectUri  (optional)
      * @param code  (optional)
      * @param refreshToken  (optional)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A User object </td><td>  -  </td></tr>
      </table>
      * Learn more about user operations provided by this API.
      * @see <a href="http://api.example.com/docs/user-operations/">Request Access Token Documentation</a>
      */
-    public void getToken(String grantType, String clientId, String clientSecret, String redirectUri, String code, String refreshToken) throws ApiException {
-        getTokenWithHttpInfo(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
+    public Object getToken(String grantType, String clientId, String clientSecret, String redirectUri, String code, String refreshToken) throws ApiException {
+        ApiResponse<Object> localVarResp = getTokenWithHttpInfo(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
+        return localVarResp.getData();
     }
 
     /**
@@ -301,19 +303,20 @@ public class OAuth20Api {
      * @param redirectUri  (optional)
      * @param code  (optional)
      * @param refreshToken  (optional)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A User object </td><td>  -  </td></tr>
      </table>
      * Learn more about user operations provided by this API.
      * @see <a href="http://api.example.com/docs/user-operations/">Request Access Token Documentation</a>
      */
-    public ApiResponse<Void> getTokenWithHttpInfo(String grantType, String clientId, String clientSecret, String redirectUri, String code, String refreshToken) throws ApiException {
+    public ApiResponse<Object> getTokenWithHttpInfo(String grantType, String clientId, String clientSecret, String redirectUri, String code, String refreshToken) throws ApiException {
         okhttp3.Call localVarCall = getTokenValidateBeforeCall(grantType, clientId, clientSecret, redirectUri, code, refreshToken, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -331,15 +334,16 @@ public class OAuth20Api {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A User object </td><td>  -  </td></tr>
      </table>
      * Learn more about user operations provided by this API.
      * @see <a href="http://api.example.com/docs/user-operations/">Request Access Token Documentation</a>
      */
-    public okhttp3.Call getTokenAsync(String grantType, String clientId, String clientSecret, String redirectUri, String code, String refreshToken, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call getTokenAsync(String grantType, String clientId, String clientSecret, String redirectUri, String code, String refreshToken, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getTokenValidateBeforeCall(grantType, clientId, clientSecret, redirectUri, code, refreshToken, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

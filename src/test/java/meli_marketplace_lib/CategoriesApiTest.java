@@ -42,7 +42,7 @@ public class CategoriesApiTest {
     @Test
     public void categoriesCategoryIdGetTest() throws ApiException {
         String categoryId = null;
-        api.categoriesCategoryIdGet(categoryId);
+        Object response = api.categoriesCategoryIdGet(categoryId);
 
         // TODO: test validations
     }
@@ -58,7 +58,7 @@ public class CategoriesApiTest {
     @Test
     public void sitesSiteIdCategoriesGetTest() throws ApiException {
         String siteId = null;
-        api.sitesSiteIdCategoriesGet(siteId);
+        Object response = api.sitesSiteIdCategoriesGet(siteId);
 
         // TODO: test validations
     }
@@ -76,7 +76,7 @@ public class CategoriesApiTest {
         String siteId = null;
         String q = null;
         String limit = null;
-        api.sitesSiteIdDomainDiscoverySearchGet(siteId, q, limit);
+        Object response = api.sitesSiteIdDomainDiscoverySearchGet(siteId, q, limit);
 
         // TODO: test validations
     }

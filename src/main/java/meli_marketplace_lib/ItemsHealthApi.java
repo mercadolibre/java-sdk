@@ -63,7 +63,7 @@ public class ItemsHealthApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call itemsIdHealthActionsGetCall(String id, String accessToken, final ApiCallback _callback) throws ApiException {
@@ -83,7 +83,7 @@ public class ItemsHealthApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -124,15 +124,17 @@ public class ItemsHealthApi {
      * 
      * @param id  (required)
      * @param accessToken  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void itemsIdHealthActionsGet(String id, String accessToken) throws ApiException {
-        itemsIdHealthActionsGetWithHttpInfo(id, accessToken);
+    public Object itemsIdHealthActionsGet(String id, String accessToken) throws ApiException {
+        ApiResponse<Object> localVarResp = itemsIdHealthActionsGetWithHttpInfo(id, accessToken);
+        return localVarResp.getData();
     }
 
     /**
@@ -140,17 +142,18 @@ public class ItemsHealthApi {
      * 
      * @param id  (required)
      * @param accessToken  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> itemsIdHealthActionsGetWithHttpInfo(String id, String accessToken) throws ApiException {
+    public ApiResponse<Object> itemsIdHealthActionsGetWithHttpInfo(String id, String accessToken) throws ApiException {
         okhttp3.Call localVarCall = itemsIdHealthActionsGetValidateBeforeCall(id, accessToken, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -164,13 +167,14 @@ public class ItemsHealthApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call itemsIdHealthActionsGetAsync(String id, String accessToken, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call itemsIdHealthActionsGetAsync(String id, String accessToken, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = itemsIdHealthActionsGetValidateBeforeCall(id, accessToken, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -183,7 +187,7 @@ public class ItemsHealthApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call itemsIdHealthGetCall(String id, String accessToken, final ApiCallback _callback) throws ApiException {
@@ -203,7 +207,7 @@ public class ItemsHealthApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -244,15 +248,17 @@ public class ItemsHealthApi {
      * 
      * @param id  (required)
      * @param accessToken  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void itemsIdHealthGet(String id, String accessToken) throws ApiException {
-        itemsIdHealthGetWithHttpInfo(id, accessToken);
+    public Object itemsIdHealthGet(String id, String accessToken) throws ApiException {
+        ApiResponse<Object> localVarResp = itemsIdHealthGetWithHttpInfo(id, accessToken);
+        return localVarResp.getData();
     }
 
     /**
@@ -260,17 +266,18 @@ public class ItemsHealthApi {
      * 
      * @param id  (required)
      * @param accessToken  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> itemsIdHealthGetWithHttpInfo(String id, String accessToken) throws ApiException {
+    public ApiResponse<Object> itemsIdHealthGetWithHttpInfo(String id, String accessToken) throws ApiException {
         okhttp3.Call localVarCall = itemsIdHealthGetValidateBeforeCall(id, accessToken, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -284,13 +291,14 @@ public class ItemsHealthApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call itemsIdHealthGetAsync(String id, String accessToken, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call itemsIdHealthGetAsync(String id, String accessToken, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = itemsIdHealthGetValidateBeforeCall(id, accessToken, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
@@ -302,7 +310,7 @@ public class ItemsHealthApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call sitesSiteIdHealthLevelsGetCall(String siteId, final ApiCallback _callback) throws ApiException {
@@ -318,7 +326,7 @@ public class ItemsHealthApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
         final String[] localVarAccepts = {
-            
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -353,32 +361,35 @@ public class ItemsHealthApi {
      * Return health levels.
      * 
      * @param siteId  (required)
+     * @return Object
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public void sitesSiteIdHealthLevelsGet(String siteId) throws ApiException {
-        sitesSiteIdHealthLevelsGetWithHttpInfo(siteId);
+    public Object sitesSiteIdHealthLevelsGet(String siteId) throws ApiException {
+        ApiResponse<Object> localVarResp = sitesSiteIdHealthLevelsGetWithHttpInfo(siteId);
+        return localVarResp.getData();
     }
 
     /**
      * Return health levels.
      * 
      * @param siteId  (required)
-     * @return ApiResponse&lt;Void&gt;
+     * @return ApiResponse&lt;Object&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> sitesSiteIdHealthLevelsGetWithHttpInfo(String siteId) throws ApiException {
+    public ApiResponse<Object> sitesSiteIdHealthLevelsGetWithHttpInfo(String siteId) throws ApiException {
         okhttp3.Call localVarCall = sitesSiteIdHealthLevelsGetValidateBeforeCall(siteId, null);
-        return localVarApiClient.execute(localVarCall);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
@@ -391,13 +402,14 @@ public class ItemsHealthApi {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Ok </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Successful operation </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call sitesSiteIdHealthLevelsGetAsync(String siteId, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call sitesSiteIdHealthLevelsGetAsync(String siteId, final ApiCallback<Object> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = sitesSiteIdHealthLevelsGetValidateBeforeCall(siteId, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
+        Type localVarReturnType = new TypeToken<Object>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 }

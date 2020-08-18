@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="categoriesCategoryIdGet"></a>
 # **categoriesCategoryIdGet**
-> categoriesCategoryIdGet(categoryId)
+> Object categoriesCategoryIdGet(categoryId)
 
 Return by category.
 
@@ -32,7 +32,8 @@ public class Example {
     CategoriesApi apiInstance = new CategoriesApi(defaultClient);
     String categoryId = "categoryId_example"; // String | 
     try {
-      apiInstance.categoriesCategoryIdGet(categoryId);
+      Object result = apiInstance.categoriesCategoryIdGet(categoryId);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CategoriesApi#categoriesCategoryIdGet");
       System.err.println("Status code: " + e.getCode());
@@ -52,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -61,16 +62,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="sitesSiteIdCategoriesGet"></a>
 # **sitesSiteIdCategoriesGet**
-> sitesSiteIdCategoriesGet(siteId)
+> Object sitesSiteIdCategoriesGet(siteId)
 
 Return a categories by site.
 
@@ -91,7 +92,8 @@ public class Example {
     CategoriesApi apiInstance = new CategoriesApi(defaultClient);
     String siteId = "siteId_example"; // String | 
     try {
-      apiInstance.sitesSiteIdCategoriesGet(siteId);
+      Object result = apiInstance.sitesSiteIdCategoriesGet(siteId);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CategoriesApi#sitesSiteIdCategoriesGet");
       System.err.println("Status code: " + e.getCode());
@@ -111,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -120,16 +122,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
 <a name="sitesSiteIdDomainDiscoverySearchGet"></a>
 # **sitesSiteIdDomainDiscoverySearchGet**
-> sitesSiteIdDomainDiscoverySearchGet(siteId, q, limit)
+> Object sitesSiteIdDomainDiscoverySearchGet(siteId, q, limit)
 
 Predictor
 
@@ -152,7 +154,8 @@ public class Example {
     String q = "q_example"; // String | 
     String limit = "limit_example"; // String | 
     try {
-      apiInstance.sitesSiteIdDomainDiscoverySearchGet(siteId, q, limit);
+      Object result = apiInstance.sitesSiteIdDomainDiscoverySearchGet(siteId, q, limit);
+      System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling CategoriesApi#sitesSiteIdDomainDiscoverySearchGet");
       System.err.println("Status code: " + e.getCode());
@@ -174,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**Object**
 
 ### Authorization
 
@@ -183,10 +186,10 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Ok |  -  |
+**200** | Successful operation |  -  |
 
