@@ -1,3 +1,12 @@
+import meli.ApiClient;
+import meli.ApiException;
+import meli.Configuration;
+import meli.model.*;
+import meli_marketplace_lib.RestClientApi;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class restClientPost {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
@@ -24,7 +33,7 @@ public class restClientPost {
           .attributeGroupId("OTHERS"));
       
     Item item = new Item();
-    item.title("Item de test - No Ofertar java");
+    item.title("Item de test - No Ofertar");
     item.categoryId("MLA5991");
     item.price(350);
     item.currencyId("ARS");
@@ -39,12 +48,12 @@ public class restClientPost {
     try {
       Object result = apiInstance.resourcePost(resource, accessToken, item);
       System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling RestClientApi#resourcePost");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
+      } catch (ApiException e) {
+        System.err.println("Exception when calling RestClientApi#resourcePost");
+        System.err.println("Status code: " + e.getCode());
+        System.err.println("Reason: " + e.getResponseBody());
+        System.err.println("Response headers: " + e.getResponseHeaders());
+        e.printStackTrace();
+      }
 	}
 }
