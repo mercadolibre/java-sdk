@@ -71,6 +71,36 @@ Then manually install the following JARs:
 
 ## Usage
 
+```java
+// Auth URLs Options by country
+
+// 1:  "https://auth.mercadolibre.com.ar"
+// 2:  "https://auth.mercadolivre.com.br"
+// 3:  "https://auth.mercadolibre.com.co"
+// 4:  "https://auth.mercadolibre.com.mx"
+// 5:  "https://auth.mercadolibre.com.uy"
+// 6:  "https://auth.mercadolibre.cl"
+// 7:  "https://auth.mercadolibre.com.cr"
+// 8:  "https://auth.mercadolibre.com.ec"
+// 9:  "https://auth.mercadolibre.com.ve"
+// 10: "https://auth.mercadolibre.com.pa"
+// 11: "https://auth.mercadolibre.com.pe"
+// 12: "https://auth.mercadolibre.com.do"
+// 13: "https://auth.mercadolibre.com.bo"
+// 14: "https://auth.mercadolibre.com.py"
+
+// For example in your app, you can make some like this to get de auth
+String clientId = "Your client_id"
+String redirectUri = "Your redirect uri"
+String url = "https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirectUri + "";
+System.out.println(url);
+
+```
+
+his will give you the url to redirect the user. You need to specify a callback url which will be the one that the user will redirected after a successfull authrization process.
+
+Once the user is redirected to your callback url, you'll receive in the query string, a parameter named code. You'll need this for the second part of the process
+
 ## Examples for OAuth - get token
 ```java
 
