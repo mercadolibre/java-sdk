@@ -72,31 +72,134 @@ Then manually install the following JARs:
 ## Usage
 
 ```java
+// Auth URLs Options by country
 
-// Import classes:
+// 1:  "https://auth.mercadolibre.com.ar"
+// 2:  "https://auth.mercadolivre.com.br"
+// 3:  "https://auth.mercadolibre.com.co"
+// 4:  "https://auth.mercadolibre.com.mx"
+// 5:  "https://auth.mercadolibre.com.uy"
+// 6:  "https://auth.mercadolibre.cl"
+// 7:  "https://auth.mercadolibre.com.cr"
+// 8:  "https://auth.mercadolibre.com.ec"
+// 9:  "https://auth.mercadolibre.com.ve"
+// 10: "https://auth.mercadolibre.com.pa"
+// 11: "https://auth.mercadolibre.com.pe"
+// 12: "https://auth.mercadolibre.com.do"
+// 13: "https://auth.mercadolibre.com.bo"
+// 14: "https://auth.mercadolibre.com.py"
+
+// For example in your app, you can make some like this to get de auth
+String clientId = "Your client_id"
+String redirectUri = "Your redirect uri"
+String url = "https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=" + clientId + "&redirect_uri=" + redirectUri + "";
+System.out.println(url);
+
+```
+
+his will give you the url to redirect the user. You need to specify a callback url which will be the one that the user will redirected after a successfull authrization process.
+
+Once the user is redirected to your callback url, you'll receive in the query string, a parameter named code. You'll need this for the second part of the process
+
+## Examples for OAuth - get token
+```java
+
+//Import classes:
 import meli.ApiClient;
 import meli.ApiException;
 import meli.Configuration;
-import meli.models.*;
-import meli_marketplace_lib.CategoriesApi;
+import meli_marketplace_lib.OAuth20Api;
 
-public class Example {
+public class getToken {
   public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.mercadolibre.com");
+  ApiClient defaultClient = Configuration.getDefaultApiClient();
+  defaultClient.setBasePath("https://api.mercadolibre.com");
 
-    CategoriesApi apiInstance = new CategoriesApi(defaultClient);
-    String categoryId = "categoryId_example"; // String | 
+  OAuth20Api apiInstance = new OAuth20Api(defaultClient);
+  String grantType = "authorization_code"; // or 'refresh_token' if you need get one new token
+  String clientId = "client_id_example"; // Your client_id
+  String clientSecret = "client_secret_example"; // Your client_secret 
+  String redirectUri = "redirect_uri_example"; // Your redirect_uri
+  String code = "code_example"; // The parameter CODE, empty if your send a refresh_token 
+  String refreshToken = ""; // Your refresh_token 
     try {
-      apiInstance.categoriesCategoryIdGet(categoryId);
+      Object response = apiInstance.getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
+      System.out.println(response);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CategoriesApi#categoriesCategoryIdGet");
+      System.err.println("Exception when calling OAuth20Api#getToken");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
       e.printStackTrace();
     }
   }
+}
+
+```
+
+## Example using the RestClient with a POST Item
+
+```java
+
+// Import classes:
+import meli.ApiClient;
+import meli.ApiException;
+import meli.Configuration;
+import meli.model.*;
+import meli_marketplace_lib.RestClientApi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class restClientPost {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.mercadolibre.com");
+
+    RestClientApi apiInstance = new RestClientApi(defaultClient);
+    String resource = "items"; //  resource like items, search, category etc
+    String accessToken = "access_token_example"; // Your access token 
+    
+    // Example to post an item in Argentina
+    List<ItemPictures> pictures = new ArrayList<ItemPictures>();
+    String source =	"https://http2.mlstatic.com/storage/developers-site-cms-admin/openapi/319968615067-mp3.jpg";
+    pictures.add(new ItemPictures().source(source));
+
+      List<AttributesValues> attrValues = new ArrayList<AttributesValues>();
+      attrValues.add(new AttributesValues().name("8 GB"));
+      List<Attributes> attributes = new ArrayList<Attributes>();
+      attributes.add(new Attributes()
+          .id("DATA_STORAGE_CAPACITY")
+          .name("Capacidad de almacenamiento de datos")
+          .valueName("8 GB")
+          .values(attrValues)
+          .attributeGroupName("Otros")
+          .attributeGroupId("OTHERS"));
+      
+    Item item = new Item();
+    item.title("Item de test - No Ofertar java");
+    item.categoryId("MLA5991");
+    item.price(350);
+    item.currencyId("ARS");
+    item.availableQuantity("12");
+    item.buyingMode("buy_it_now");
+    item.listingTypeId("bronze");
+    item.condition("new");
+    item.description("Item de Teste. Mercado Livre SDK");
+    item.videoId("RXWn6kftTHY");
+    item.pictures(pictures);
+    item.attributes(attributes);
+    try {
+      Object result = apiInstance.resourcePost(resource, accessToken, item);
+      System.out.println(result);
+      } catch (ApiException e) {
+        System.err.println("Exception when calling RestClientApi#resourcePost");
+        System.err.println("Status code: " + e.getCode());
+        System.err.println("Reason: " + e.getResponseBody());
+        System.err.println("Response headers: " + e.getResponseHeaders());
+        e.printStackTrace();
+      }
+	}
 }
 
 ```
