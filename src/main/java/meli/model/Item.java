@@ -13,21 +13,13 @@
 
 package meli.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-import meli.model.Attributes;
-import meli.model.ItemPictures;
-import meli.model.Variations;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Item
@@ -37,6 +29,10 @@ public class Item {
   public static final String SERIALIZED_NAME_TITLE = "title";
   @SerializedName(SERIALIZED_NAME_TITLE)
   private String title;
+
+  public static final String SERIALIZED_NAME_LOCATION = "location";
+  @SerializedName(SERIALIZED_NAME_LOCATION)
+  private Map<String,Object> location;
 
   public static final String SERIALIZED_NAME_CATEGORY_ID = "category_id";
   @SerializedName(SERIALIZED_NAME_CATEGORY_ID)
@@ -108,6 +104,25 @@ public class Item {
     this.title = title;
   }
 
+  public Item location(Map<String,Object> location) {
+
+    this.location = location;
+    return this;
+  }
+
+  /**
+   * Get title
+   * @return title
+   **/
+  @ApiModelProperty(example = "{}", required = true, value = "")
+
+  public Map<String,Object> getLocation() {
+    return location;
+  }
+
+  public void setLocation(Map<String,Object> location) {
+    this.location = location;
+  }
 
   public Item categoryId(String categoryId) {
     
@@ -397,7 +412,7 @@ public class Item {
 
 
   @Override
-  public boolean equals(java.lang.Object o) {
+  public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
@@ -451,7 +466,7 @@ public class Item {
    * Convert the given object to string with each line indented by 4 spaces
    * (except the first line).
    */
-  private String toIndentedString(java.lang.Object o) {
+  private String toIndentedString(Object o) {
     if (o == null) {
       return "null";
     }
