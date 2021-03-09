@@ -1,4 +1,20 @@
+![No longer maintained](https://img.shields.io/badge/Maintenance-OFF-red.svg)
 
+### [DEPRECATED] This repository is no longer maintained
+
+> From the first week of April 2021 we will stop maintaining our SDKs.
+>
+> This project is not functional, the dependencies will not be updated to latest ones.
+>
+> We recommend you read our [documentation](https://developers.mercadolibre.com).
+
+  <a href="https://developers.mercadolibre.com">
+    <img src="https://user-images.githubusercontent.com/1153516/73021269-043c2d80-3e06-11ea-8d0e-6e91441c2900.png" alt="Mercado Libre Developers" width="200"></a>
+  </a>
+
+---
+
+<br>
 <h1 align="center">
   <a href="https://developers.mercadolibre.com">
     <img src="https://user-images.githubusercontent.com/1153516/29861072-689ec57e-8d3e-11e7-8368-dd923543258f.jpg" alt="Mercado Libre Developers" width="230"></a>
@@ -10,11 +26,10 @@
 
 <h4 align="center">This is the official JAVA SDK for MercadoLibre's Platform.</h4>
 
-
-
 ## Requirements
 
 Building the API client library requires:
+
 1. Java 1.7+
 2. Maven/Gradle
 
@@ -65,9 +80,8 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/openapi-java-client-0.1.7.jar`
-* `target/lib/*.jar`
-
+- `target/openapi-java-client-0.1.7.jar`
+- `target/lib/*.jar`
 
 ## Usage
 
@@ -102,6 +116,7 @@ his will give you the url to redirect the user. You need to specify a callback u
 Once the user is redirected to your callback url, you'll receive in the query string, a parameter named code. You'll need this for the second part of the process
 
 ## Examples for OAuth - get token
+
 ```java
 
 //Import classes:
@@ -118,10 +133,10 @@ public class getToken {
   OAuth20Api apiInstance = new OAuth20Api(defaultClient);
   String grantType = "authorization_code"; // or 'refresh_token' if you need get one new token
   String clientId = "client_id_example"; // Your client_id
-  String clientSecret = "client_secret_example"; // Your client_secret 
+  String clientSecret = "client_secret_example"; // Your client_secret
   String redirectUri = "redirect_uri_example"; // Your redirect_uri
-  String code = "code_example"; // The parameter CODE, empty if your send a refresh_token 
-  String refreshToken = ""; // Your refresh_token 
+  String code = "code_example"; // The parameter CODE, empty if your send a refresh_token
+  String refreshToken = ""; // Your refresh_token
     try {
       Object response = apiInstance.getToken(grantType, clientId, clientSecret, redirectUri, code, refreshToken);
       System.out.println(response);
@@ -158,8 +173,8 @@ public class restClientPost {
 
     RestClientApi apiInstance = new RestClientApi(defaultClient);
     String resource = "items"; //  resource like items, search, category etc
-    String accessToken = "access_token_example"; // Your access token 
-    
+    String accessToken = "access_token_example"; // Your access token
+
     // Example to post an item in Argentina
     List<ItemPictures> pictures = new ArrayList<ItemPictures>();
     String source =	"https://http2.mlstatic.com/storage/developers-site-cms-admin/openapi/319968615067-mp3.jpg";
@@ -175,7 +190,7 @@ public class restClientPost {
           .values(attrValues)
           .attributeGroupName("Otros")
           .attributeGroupId("OTHERS"));
-      
+
     Item item = new Item();
     item.title("Item de test - No Ofertar java");
     item.categoryId("MLA5991");
@@ -208,16 +223,14 @@ public class restClientPost {
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
-
 ## Documentation & Important notes
 
 ##### The URIs are relative to https://api.mercadolibre.com
 
 ##### The Authorization URLs (set the correct country domain): https://auth.mercadolibre.{country_domain}
 
+##### All docs for the library are located [here](https://github.com/mercadolibre/java-sdk/tree/master/docs)
 
-#####  All docs for the library are located [here](https://github.com/mercadolibre/java-sdk/tree/master/docs)
-
-#####  Check out our examples codes in the folder [examples](https://github.com/mercadolibre/java-sdk/tree/master/examples)
+##### Check out our examples codes in the folder [examples](https://github.com/mercadolibre/java-sdk/tree/master/examples)
 
 ##### Don’t forget to check out our [developer site](https://developers.mercadolibre.com/)
